@@ -607,10 +607,10 @@
                     "id": "w6_q1",
                     "question": "True or False: ROPE uses additive embeddings like sinusoidal encoding.",
                     "options": [
-                        "True",
-                        "False"
+                        "a. True",
+                        "b. False"
                     ],
-                    "answer": "False",
+                    "answer": "b",
                     "solution": "Please refer to slides."
                 },
                 {
@@ -641,10 +641,10 @@
                     "id": "w6_q4",
                     "question": "True or False: The feedforward network in a Transformer block introduces non-linearity between attention layers.",
                     "options": [
-                        "True",
-                        "False"
+                        "a. True",
+                        "b. False"
                     ],
-                    "answer": "True",
+                    "answer": "a",
                     "solution": "Please refer to lecture slides."
                 },
                 {
