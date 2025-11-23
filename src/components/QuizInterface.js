@@ -79,8 +79,10 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
     const currentQuestion = questions[currentIndex];
     if (!currentQuestion) return null;
 
+    // Check if this is a text input question (no options array or empty options)
+    const isTextInput = !currentQuestion.options || currentQuestion.options.length === 0;
     const correctAnswers = currentQuestion.answer.toLowerCase().split(',').map(s => s.trim());
-    const isMultipleChoice = correctAnswers.length > 1;
+    const isMultipleChoice = !isTextInput && correctAnswers.length > 1;
 
     const handleOptionToggle = (option) => {
         if (mode === 'learn' || isConfirmed) return;
@@ -92,6 +94,11 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
         } else {
             setSelectedOptions([optLetter]);
         }
+    };
+
+    const handleTextInputChange = (e) => {
+        if (mode === 'learn' || isConfirmed) return;
+        setSelectedOptions([e.target.value.toLowerCase().trim()]);
     };
 
     const handleConfirm = () => {
@@ -115,6 +122,11 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
     };
 
     const isAnswerCorrect = () => {
+        if (isTextInput) {
+            // For text input, check if the user's answer matches any of the correct answers
+            const userAnswer = selectedOptions[0] || '';
+            return correctAnswers.includes(userAnswer);
+        }
         if (selectedOptions.length !== correctAnswers.length) return false;
         return selectedOptions.every(opt => correctAnswers.includes(opt)) &&
             correctAnswers.every(ans => selectedOptions.includes(ans));
@@ -236,11 +248,15 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
                     ) : (
                         <span className="text-sm text-gray-400 uppercase tracking-wider">{mode}</span>
                     )}
-                    {isMultipleChoice && (
+                    {isTextInput ? (
+                        <span className="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full font-bold">
+                            Text Answer
+                        </span>
+                    ) : isMultipleChoice ? (
                         <span className="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full font-bold">
                             Multiple Choice
                         </span>
-                    )}
+                    ) : null}
                 </div>
                 <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full"><X /></button>
             </div>
@@ -250,8 +266,53 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
                     <Latex>{currentQuestion.question || ''}</Latex>
                 </h3>
 
-                <div className="space-y-3">
-                    {currentQuestion.options.map((option, idx) => {
+                {isTextInput ? (
+                    <div className="space-y-4">
+                        {mode === 'learn' ? (
+                            <div className="p-4 rounded-xl border-2 bg-green-50 border-green-500">
+                                <div className="font-medium text-green-700 mb-2">
+                                    ✓ Correct Answer:
+                                </div>
+                                <div className="text-lg font-bold text-green-900">
+                                    {currentQuestion.answer}
+                                </div>
+                            </div>
+                        ) : (
+                            <>
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        value={selectedOptions[0] || ''}
+                                        onChange={handleTextInputChange}
+                                        disabled={isConfirmed}
+                                        placeholder="Enter your answer..."
+                                        className={`w-full p-4 border-2 rounded-xl text-lg transition-all duration-200 ${
+                                            isConfirmed
+                                                ? 'bg-gray-50 cursor-not-allowed'
+                                                : 'border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none'
+                                        }`}
+                                    />
+                                </div>
+                                {isConfirmed && (
+                                    <div className={`p-4 rounded-xl border-2 ${
+                                        isAnswerCorrect()
+                                            ? 'bg-green-50 border-green-500'
+                                            : 'bg-red-50 border-red-500'
+                                    }`}>
+                                        <div className="font-medium mb-1">
+                                            {isAnswerCorrect() ? '✓ Correct!' : '✗ Incorrect'}
+                                        </div>
+                                        <div className="text-sm text-gray-700">
+                                            Correct answer: <span className="font-bold">{currentQuestion.answer}</span>
+                                        </div>
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </div>
+                ) : (
+                    <div className="space-y-3">
+                        {currentQuestion.options.map((option, idx) => {
                         const optLetter = option.charAt(0).toLowerCase();
                         const isSelected = selectedOptions.includes(optLetter);
                         const isCorrectOption = isOptionCorrect(option);
@@ -301,7 +362,8 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
                             </motion.div>
                         );
                     })}
-                </div>
+                    </div>
+                )}
 
                 {(showSolution || mode === 'learn') && currentQuestion.solution && (
                     <motion.div
