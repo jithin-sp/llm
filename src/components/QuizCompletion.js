@@ -88,30 +88,30 @@ const QuizCompletion = () => {
                         <div className="bg-white rounded-xl shadow-md border border-blue-100 p-4 sticky top-4">
                             <h2 className="text-lg font-bold text-blue-900 mb-3 text-center">Your Score</h2>
 
-                            {/* Score Display */}
-                            <div className="text-center mb-4">
+                            {/* Score Display with Stats */}
+                            <div className="text-center mb-3">
                                 <div className="text-5xl font-black text-blue-600 mb-1">
                                     {score}/{total}
                                 </div>
-                                <div className="text-xl font-semibold text-gray-700">
+                                <div className="text-xl font-semibold text-gray-700 mb-2">
                                     {scorePercentage}%
                                 </div>
-                            </div>
-
-                            {/* Stats */}
-                            <div className="space-y-2">
-                                <div className="flex items-center justify-between p-2 bg-green-50 rounded-lg">
-                                    <span className="text-sm font-medium text-gray-700">Correct</span>
-                                    <span className="text-lg font-bold text-green-600">{correct}</span>
-                                </div>
-                                <div className="flex items-center justify-between p-2 bg-red-50 rounded-lg">
-                                    <span className="text-sm font-medium text-gray-700">Incorrect</span>
-                                    <span className="text-lg font-bold text-red-600">{incorrect}</span>
+                                {/* Compact Stats beside score */}
+                                <div className="flex items-center justify-center gap-3 text-sm">
+                                    <div className="flex items-center gap-1">
+                                        <span className="text-gray-600">✓</span>
+                                        <span className="font-bold text-green-600">{correct}</span>
+                                    </div>
+                                    <div className="w-px h-4 bg-gray-300"></div>
+                                    <div className="flex items-center gap-1">
+                                        <span className="text-gray-600">✗</span>
+                                        <span className="font-bold text-red-600">{incorrect}</span>
+                                    </div>
                                 </div>
                             </div>
 
                             {/* Performance Badge */}
-                            <div className="mt-4 text-center">
+                            <div className="mb-3 text-center">
                                 {scorePercentage >= 80 ? (
                                     <div className="bg-green-100 text-green-700 px-3 py-2 rounded-lg text-sm font-semibold">
                                         🎉 Excellent!
@@ -130,7 +130,7 @@ const QuizCompletion = () => {
                             {/* Try Again Button */}
                             <button
                                 onClick={() => router.push(`/quiz/${weekNumber}/${mode}`)}
-                                className="w-full mt-4 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                                className="w-full py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
                             >
                                 <ArrowLeft className="w-4 h-4" />
                                 Try Again
@@ -162,41 +162,93 @@ const QuizCompletion = () => {
                                 </div>
                             ) : (
                                 <>
-                                    {/* Top 3 Podium */}
+                                    {/* Top 3 Podium - 2nd, 1st, 3rd layout */}
                                     {topThree.length > 0 && (
                                         <div className="mb-6 pb-6 border-b border-gray-200">
-                                            <div className="grid grid-cols-3 gap-3">
-                                                {topThree.map((user, idx) => {
-                                                    const isCurrentUser = user.userId === currentUserId;
-                                                    return (
-                                                        <motion.div
-                                                            key={user.$id}
-                                                            initial={{ opacity: 0, y: 20 }}
-                                                            animate={{ opacity: 1, y: 0 }}
-                                                            transition={{ delay: idx * 0.1 }}
-                                                            className={`p-3 rounded-lg border-2 ${user.rank === 1 ? 'bg-yellow-50 border-yellow-400' :
-                                                                    user.rank === 2 ? 'bg-gray-50 border-gray-400' :
-                                                                        'bg-amber-50 border-amber-400'
-                                                                } ${isCurrentUser ? 'ring-2 ring-blue-500' : ''}`}
-                                                        >
-                                                            <div className="flex items-center justify-center mb-2">
-                                                                {getMedalIcon(user.rank)}
+                                            <div className="flex items-end justify-center gap-3">
+                                                {/* 2nd Place - Left, shorter */}
+                                                {topThree[1] && (
+                                                    <motion.div
+                                                        key={topThree[1].$id}
+                                                        initial={{ opacity: 0, y: 20 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        transition={{ delay: 0.1 }}
+                                                        className={`flex-1 p-3 rounded-lg border-2 bg-gray-50 border-gray-400 ${topThree[1].userId === currentUserId ? 'ring-2 ring-blue-500' : ''}`}
+                                                        style={{ maxHeight: '140px' }}
+                                                    >
+                                                        <div className="flex items-center justify-center mb-2">
+                                                            <Medal className="w-6 h-6 text-gray-400" />
+                                                        </div>
+                                                        <div className="text-center">
+                                                            <div className="text-xs font-semibold text-gray-600 mb-1">
+                                                                #2
                                                             </div>
-                                                            <div className="text-center">
-                                                                <div className="text-xs font-semibold text-gray-600 mb-1">
-                                                                    #{user.rank}
-                                                                </div>
-                                                                <div className="font-bold text-sm text-gray-800 truncate">
-                                                                    {user.username}
-                                                                </div>
-                                                                <div className="text-lg font-black text-blue-600">
-                                                                    {user.totalScore}
-                                                                </div>
-                                                                <div className="text-xs text-gray-500">points</div>
+                                                            <div className="font-bold text-sm text-gray-800 truncate mb-1">
+                                                                {topThree[1].username}
                                                             </div>
-                                                        </motion.div>
-                                                    );
-                                                })}
+                                                            <div className="flex items-baseline justify-center gap-1">
+                                                                <span className="text-base font-black text-blue-600">{topThree[1].totalScore}</span>
+                                                                <span className="text-[10px] text-gray-500">pts</span>
+                                                            </div>
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+
+                                                {/* 1st Place - Center, tallest */}
+                                                {topThree[0] && (
+                                                    <motion.div
+                                                        key={topThree[0].$id}
+                                                        initial={{ opacity: 0, y: 20 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        transition={{ delay: 0 }}
+                                                        className={`flex-1 p-4 rounded-lg border-2 bg-yellow-50 border-yellow-400 ${topThree[0].userId === currentUserId ? 'ring-2 ring-blue-500' : ''}`}
+                                                        style={{ maxHeight: '170px' }}
+                                                    >
+                                                        <div className="flex items-center justify-center mb-2">
+                                                            <Trophy className="w-7 h-7 text-yellow-500" />
+                                                        </div>
+                                                        <div className="text-center">
+                                                            <div className="text-xs font-semibold text-gray-600 mb-1">
+                                                                #1
+                                                            </div>
+                                                            <div className="font-bold text-base text-gray-800 truncate mb-1">
+                                                                {topThree[0].username}
+                                                            </div>
+                                                            <div className="flex items-baseline justify-center gap-1">
+                                                                <span className="text-lg font-black text-blue-600">{topThree[0].totalScore}</span>
+                                                                <span className="text-[10px] text-gray-500">pts</span>
+                                                            </div>
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+
+                                                {/* 3rd Place - Right, shortest */}
+                                                {topThree[2] && (
+                                                    <motion.div
+                                                        key={topThree[2].$id}
+                                                        initial={{ opacity: 0, y: 20 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        transition={{ delay: 0.2 }}
+                                                        className={`flex-1 p-3 rounded-lg border-2 bg-amber-50 border-amber-400 ${topThree[2].userId === currentUserId ? 'ring-2 ring-blue-500' : ''}`}
+                                                        style={{ maxHeight: '120px' }}
+                                                    >
+                                                        <div className="flex items-center justify-center mb-2">
+                                                            <Award className="w-5 h-5 text-amber-600" />
+                                                        </div>
+                                                        <div className="text-center">
+                                                            <div className="text-xs font-semibold text-gray-600 mb-1">
+                                                                #3
+                                                            </div>
+                                                            <div className="font-bold text-sm text-gray-800 truncate mb-1">
+                                                                {topThree[2].username}
+                                                            </div>
+                                                            <div className="flex items-baseline justify-center gap-1">
+                                                                <span className="text-sm font-black text-blue-600">{topThree[2].totalScore}</span>
+                                                                <span className="text-[10px] text-gray-500">pts</span>
+                                                            </div>
+                                                        </div>
+                                                    </motion.div>
+                                                )}
                                             </div>
                                         </div>
                                     )}
