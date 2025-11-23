@@ -1,0 +1,1417 @@
+{
+    "course_title": "Introduction to Large Language Models",
+    "weeks": [
+        {
+            "week_number": 1,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w1_q1",
+                    "question": "Which of the following best demonstrates the principle of distributional semantics?",
+                    "options": [
+                        "a. Words that co-occur frequently tend to share semantic properties.",
+                        "b. Each word has a unique, fixed meaning regardless of context.",
+                        "c. Syntax determines the entire meaning of a sentence.",
+                        "d. Distributional semantics is unrelated to word embeddings."
+                    ],
+                    "answer": "a",
+                    "solution": null
+                },
+                {
+                    "id": "w1_q2",
+                    "question": "Which of the following words is least likely to be polysemous?",
+                    "options": [
+                        "a. Bank",
+                        "b. Tree",
+                        "c. Gravity",
+                        "d. Idea"
+                    ],
+                    "answer": "c",
+                    "solution": null
+                },
+                {
+                    "id": "w1_q3",
+                    "question": "Consider the following sentence pair:\nSentence 1: Riya dropped the glass.\nSentence 2: The glass broke.\nDoes Sentence 1 entail Sentence 2?",
+                    "options": [
+                        "a. Yes",
+                        "b. No"
+                    ],
+                    "answer": "b",
+                    "solution": "Entailment is not guaranteed - the glass might not have broken."
+                },
+                {
+                    "id": "w1_q4",
+                    "question": "Which sentence contains a homonym?",
+                    "options": [
+                        "a. He wound the clock before bed.",
+                        "b. She tied her hair in a bun.",
+                        "c. I can't bear the noise.",
+                        "d. He likes to bat after lunch."
+                    ],
+                    "answer": "d",
+                    "solution": "\"Bat\" - sports equipment or animal, depending on usage."
+                },
+                {
+                    "id": "w1_q5",
+                    "question": "Which of the following relationships are incorrectly labeled?",
+                    "options": [
+                        "a. Car is a meronym of wheel.",
+                        "b. Rose is a hyponym of flower.",
+                        "c. Keyboard is a holonym of key.",
+                        "d. Tree is a hypernym of oak."
+                    ],
+                    "answer": "a",
+                    "solution": "Wheel is a meronym of car, not the other way around."
+                },
+                {
+                    "id": "w1_q6",
+                    "question": "______ studies how context influences the interpretation of meaning.",
+                    "options": [
+                        "a. Syntax",
+                        "b. Morphology",
+                        "c. Pragmatics",
+                        "d. Semantics"
+                    ],
+                    "answer": "c",
+                    "solution": null
+                },
+                {
+                    "id": "w1_q7",
+                    "question": "In the sentence, \"After Sita praised Radha, she smiled shyly,\" who does \"she\" most likely refer to?",
+                    "options": [
+                        "a. Sita",
+                        "b. Radha",
+                        "c. Ambiguous",
+                        "d. Neither"
+                    ],
+                    "answer": "c",
+                    "solution": null
+                },
+                {
+                    "id": "w1_q8",
+                    "question": "Which of the following statements is true?\n(i) Word embeddings capture semantic similarity through context.\n(ii) Morphological analysis is irrelevant in LLMs.\n(iii) Hypernyms are more specific than hyponyms.",
+                    "options": [
+                        "a. Only (i)",
+                        "b. Only (i) and (iii)",
+                        "c. Only (ii) and (iii)",
+                        "d. All of the above"
+                    ],
+                    "answer": "a",
+                    "solution": null
+                },
+                {
+                    "id": "w1_q9",
+                    "question": "What issues can be observed in the following text?\n\"On a much-needed #workcation in beautiful Goa. Workin & chillin by d waves!\"",
+                    "options": [
+                        "a. Idioms",
+                        "b. Non-standard English",
+                        "c. Tricky Entity Names",
+                        "d. Neologisms"
+                    ],
+                    "answer": "b, d",
+                    "solution": null
+                },
+                {
+                    "id": "w1_q10",
+                    "question": "In semantic role labelling, we determine the semantic role of each argument with respect to the ______ of the sentence.",
+                    "options": [
+                        "a. noun phrase",
+                        "b. subject",
+                        "c. predicate",
+                        "d. adjunct"
+                    ],
+                    "answer": "c",
+                    "solution": null
+                }
+            ]
+        },
+        {
+            "week_number": 2,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w2_q1",
+                    "question": "Which of the following does not directly affect perplexity?",
+                    "options": [
+                        "a. Vocabulary size",
+                        "b. Sentence probability",
+                        "c. Number of tokens",
+                        "d. Sentence length"
+                    ],
+                    "answer": "a",
+                    "solution": null
+                },
+                {
+                    "id": "w2_q2",
+                    "question": "What is the goal of a probabilistic language model?",
+                    "options": [
+                        "a. Translate sentences",
+                        "b. Predict the next word in a sequence",
+                        "c. Classify documents",
+                        "d. Summarize text"
+                    ],
+                    "answer": "b",
+                    "solution": null
+                },
+                {
+                    "id": "w2_q3",
+                    "question": "Which equation expresses the chain rule for a 4-word sentence?",
+                    "options": [
+                        "a. $P(w1,w2,w3,w4)=P(w1)+P(w2|w1)+P(w3|w2)+P(w4|w3)$",
+                        "b. $P(w1,w2,w3,w4)=P(w1)\\times P(w2|w1)\\times P(w3|w1,w2)\\times P(w4|w1,w2,w3)$",
+                        "c. $P(w1,w2,w3,w4)=P(w1)\\times P(w2|w1)\\times P(w3|w2)\\times P(w4|w3)$",
+                        "d. $P(w1,w2,w3,w4)=P(w4|w3)\\times P(w3|w2)\\times P(w2|w1)\\times P(w1)$"
+                    ],
+                    "answer": "b",
+                    "solution": null
+                },
+                {
+                    "id": "w2_q4",
+                    "question": "Which assumption allows n-gram models to reduce computation?",
+                    "options": [
+                        "a. Bayes Assumption",
+                        "b. Chain Rule",
+                        "c. Independence Assumption",
+                        "d. Markov Assumption"
+                    ],
+                    "answer": "d",
+                    "solution": null
+                },
+                {
+                    "id": "w2_q5_1",
+                    "question": "In a trigram language model, which of the following is a correct example of linear interpolation?",
+                    "options": [
+                        "a. $P(w_{i}|w_{i-2},w_{i-1})=\\lambda_{1}P(w_{i}|w_{i-2,},w_{i-1})$",
+                        "b. $P(w_{i}|w_{i-2},w_{i-1})=\\lambda_{1}P(w_{i}|w_{i-2},w_{i-1})+\\lambda_{2}P(w_{i}|w_{i-1})+\\lambda_{3}P(w_{i})$",
+                        "c. $P(w_{i}|w_{i-2},w_{i-1})=max(P(w_{i}|w_{i-2},w_{i-1}),P(w_{i}|w_{i-1}))$",
+                        "d. $P(w_{i}|w_{i-2},w_{i-1})=P(w_{i})P(w_{i-1})/P(w_{i-2})$"
+                    ],
+                    "answer": "b",
+                    "solution": null
+                },
+                {
+                    "id": "w2_q5_2",
+                    "question": "A trigram model is equivalent to which order Markov model?",
+                    "options": [
+                        "a. 3",
+                        "b. 2",
+                        "c. 1",
+                        "d. 4"
+                    ],
+                    "answer": "b",
+                    "solution": null
+                },
+                {
+                    "id": "w2_q6",
+                    "question": "Which smoothing technique leverages the number of unique contexts a word appears in?",
+                    "options": [
+                        "a. Good-Turing",
+                        "b. Add-k",
+                        "c. Kneser-Ney",
+                        "d. Absolute Discounting"
+                    ],
+                    "answer": "c",
+                    "solution": "Kneser-Ney uses continuation probability which counts the number of unique left contexts."
+                },
+                {
+                    "id": "w2_corpus_q4",
+                    "question": "Consider the following corpus:\n[s] the sky is blue [/s]\n[s] birds fly in the sky [/s]\n[s] the blue birds sing [/s]\n\nAssuming a bi-gram language model, calculate the probability of the sentence: [s] birds fly in the blue sky [/s]\nIgnore the unigram probability of $P([s])$ in your calculation.",
+                    "options": [
+                        "a. $2/37$",
+                        "b. $1/27$",
+                        "c. 0",
+                        "d. $1/36$"
+                    ],
+                    "answer": "c",
+                    "solution": "Calculated as: $P(sky|blue) = Count(blue~sky) = 0$. Therefore, total probability is 0."
+                },
+                {
+                    "id": "w2_corpus_q5",
+                    "question": "Assuming a bi-gram language model, calculate the perplexity of the sentence: [s] birds fly in the blue sky [/s]\nPlease do not consider [s] and [/s] as words of the sentence.",
+                    "options": [
+                        "a. 271/4",
+                        "b. 271/5",
+                        "c. 91/6",
+                        "d. None of these"
+                    ],
+                    "answer": "d",
+                    "solution": "As calculated in the previous question, $P(\\text{sentence}) = 0$. Thus, Perplexity = undefined."
+                }
+            ]
+        },
+        {
+            "week_number": 3,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w3_q1",
+                    "question": "In backpropagation, which method is used to compute the gradients?",
+                    "options": [
+                        "a. Gradient descent",
+                        "b. Chain rule of derivatives",
+                        "c. Matrix factorization",
+                        "d. Linear regression"
+                    ],
+                    "answer": "b",
+                    "solution": "Backpropagation uses the chain rule of derivatives to calculate the gradients layer by layer."
+                },
+                {
+                    "id": "w3_q2",
+                    "question": "Which of the following functions is not differentiable at zero?",
+                    "options": [
+                        "a. Sigmoid",
+                        "b. Tanh",
+                        "c. ReLU",
+                        "d. Linear"
+                    ],
+                    "answer": "c",
+                    "solution": "ReLU is not differentiable at zero since the left and right limits of the derivative are not equal."
+                },
+                {
+                    "id": "w3_q3",
+                    "question": "In the context of regularization, which of the following statements is true?",
+                    "options": [
+                        "a. L2 regularization tends to produce sparse weights",
+                        "b. Dropout is applied during inference to improve accuracy",
+                        "c. L1 regularization adds the squared weight penalties to the loss function",
+                        "d. Dropout prevents overfitting by randomly disabling neurons during training"
+                    ],
+                    "answer": "d",
+                    "solution": "Dropout deactivates neurons randomly during training to prevent overfitting."
+                },
+                {
+                    "id": "w3_q4",
+                    "question": "Which activation function is least likely to suffer from vanishing gradients?",
+                    "options": [
+                        "a. Tanh",
+                        "b. Sigmoid",
+                        "c. ReLU"
+                    ],
+                    "answer": "c",
+                    "solution": "Its gradient is 1 for positive input and 0 for negative input, so it allows gradients to flow effectively."
+                },
+                {
+                    "id": "w3_q5",
+                    "question": "Which of the following equations correctly represents the derivative of the sigmoid function?",
+                    "options": [
+                        "a. $\\sigma(x)\\cdot(1+\\sigma(x))$",
+                        "b. $\\sigma(x)^{2}$",
+                        "c. $\\sigma(x)\\cdot(1-\\sigma(x))$",
+                        "d. $1/(1+e^{x})$"
+                    ],
+                    "answer": "c",
+                    "solution": "The derivative of sigmoid $\\sigma(x)$ is $\\sigma(x)(1-\\sigma(x))$."
+                },
+                {
+                    "id": "w3_q6",
+                    "question": "What condition must be met for the Perceptron learning algorithm to converge?",
+                    "options": [
+                        "a. Learning rate must be zero",
+                        "b. Data must be non-linearly separable",
+                        "c. Data must be linearly separable",
+                        "d. Activation function must be sigmoid"
+                    ],
+                    "answer": "c",
+                    "solution": null
+                },
+                {
+                    "id": "w3_q7",
+                    "question": "Which of the following logic functions requires a network with at least one hidden layer to model?",
+                    "options": [
+                        "a. AND",
+                        "b. OR",
+                        "c. NOT",
+                        "d. XOR"
+                    ],
+                    "answer": "d",
+                    "solution": "XOR is the classic example of a non-linearly separable function."
+                },
+                {
+                    "id": "w3_q8",
+                    "question": "Why is it necessary to include non-linear activation functions between layers in an MLP?",
+                    "options": [
+                        "a. Without them, the network is just a linear function",
+                        "b. They prevent overfitting",
+                        "c. They allow backpropagation to work"
+                    ],
+                    "answer": "a",
+                    "solution": "Without non-linearity, stacking linear layers results in another linear function limiting the model's expressiveness."
+                },
+                {
+                    "id": "w3_q9",
+                    "question": "What is typically the output activation function for an MLP solving a binary classification task?",
+                    "options": [
+                        "a. Tanh",
+                        "b. ReLU",
+                        "c. Sigmoid",
+                        "d. Softmax"
+                    ],
+                    "answer": "c",
+                    "solution": "For binary classification, the output is usually a single unit with a sigmoid activation."
+                },
+                {
+                    "id": "w3_q10",
+                    "question": "Which type of regularization encourages sparsity in the weights?",
+                    "options": [
+                        "a. L1 regularization",
+                        "b. L2 regularization",
+                        "c. Dropout",
+                        "d. Early stopping"
+                    ],
+                    "answer": "a",
+                    "solution": "L1 regularization encourages sparsity in the weights."
+                }
+            ]
+        },
+        {
+            "week_number": 4,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w4_q1",
+                    "question": "A one-hot vector representation captures semantic similarity between related words like \"king\" and \"queen\".",
+                    "options": [
+                        "a. True",
+                        "b. False"
+                    ],
+                    "answer": "b",
+                    "solution": "One-hot vectors are orthogonal; no similarity is encoded."
+                },
+                {
+                    "id": "w4_q2",
+                    "question": "Which method is used to reduce the dimensionality of a term-context matrix in count-based word representations?",
+                    "options": [
+                        "a. Principal Component Analysis",
+                        "b. Matrix Inversion",
+                        "c. Singular Value Decomposition (SVD)",
+                        "d. Latent Dirichlet Allocation"
+                    ],
+                    "answer": "c",
+                    "solution": "SVD is used to obtain low-dimensional representations in latent semantic analysis."
+                },
+                {
+                    "id": "w4_q3",
+                    "question": "Which property makes tf-idf a better representation than raw term frequency?",
+                    "options": [
+                        "a. It is non-linear",
+                        "b. It accounts for the informativeness of words",
+                        "c. It penalizes longer documents",
+                        "d. It uses hierarchical clustering"
+                    ],
+                    "answer": "c",
+                    "solution": "IDF downweights common terms like \"the\" and emphasizes rare but important ones."
+                },
+                {
+                    "id": "w4_q4",
+                    "question": "What is the purpose of using negative sampling in Word2Vec training?",
+                    "options": [
+                        "a. To reduce dimensionality of word vectors",
+                        "b. To ensure gradient convergence",
+                        "c. To balance class distribution in classification",
+                        "d. To simplify softmax computation"
+                    ],
+                    "answer": "d",
+                    "solution": "Negative sampling avoids computing softmax over the entire vocabulary."
+                },
+                {
+                    "id": "w4_q5",
+                    "question": "In skip-gram Word2Vec, the model:",
+                    "options": [
+                        "a. Predicts a word given its context",
+                        "b. Predicts the next sentence",
+                        "c. Predicts surrounding context words given a target word",
+                        "d. Learns n-gram frequencies"
+                    ],
+                    "answer": "c",
+                    "solution": "Skip-gram learns by predicting surrounding words given a center word."
+                },
+                {
+                    "id": "w4_q6",
+                    "question": "Why does SVD-based word embedding struggle with adding new words to the vocabulary?",
+                    "options": [
+                        "a. It uses online learning",
+                        "b. It lacks semantic interpretability",
+                        "c. It assumes word order",
+                        "d. It is computationally expensive to retrain"
+                    ],
+                    "answer": "d",
+                    "solution": "New words require recomputing the entire decomposition."
+                },
+                {
+                    "id": "w4_q7",
+                    "question": "Which of the following best describes the term \"distributional hypothesis\" in NLP?",
+                    "options": [
+                        "a. Words with high frequency have greater meaning",
+                        "b. Words are defined by their part-of-speech tags",
+                        "c. A word's meaning is characterized by the words around it",
+                        "d. Words should be normalized before vectorization"
+                    ],
+                    "answer": "c",
+                    "solution": null
+                },
+                {
+                    "id": "w4_q8",
+                    "question": "In Word2Vec, similarity between word vectors is computed using Euclidean distance.",
+                    "options": [
+                        "a. True",
+                        "b. False"
+                    ],
+                    "answer": "b",
+                    "solution": "Similarity is computed using dot product or cosine similarity."
+                },
+                {
+                    "id": "w4_q9",
+                    "question": "Which method solves the problem of OOV (Out-Of-Vocabulary) words better?",
+                    "options": [
+                        "a. One-hot encoding",
+                        "b. CBOW",
+                        "c. Skip-gram with subsampling",
+                        "d. FastText embedding"
+                    ],
+                    "answer": "d",
+                    "solution": "FastText builds embeddings using character n-grams and handles unseen words."
+                },
+                {
+                    "id": "w4_q10",
+                    "question": "If the word \"economy\" occurs 4 times in a corpus, and \"growth\" appears in a window of 5 words around it 3 times, what is the entry for (economy, growth) in a term-context matrix?",
+                    "options": [
+                        "a. 1",
+                        "b. 2",
+                        "c. 3",
+                        "d. 4"
+                    ],
+                    "answer": "c",
+                    "solution": "It counts co-occurrences in the window - here, 3 times."
+                }
+            ]
+        },
+        {
+            "week_number": 5,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w5_q1",
+                    "question": "Which of the following best explains the vanishing gradient problem in RNNs?",
+                    "options": [
+                        "a. RNNs lack memory mechanisms for long-term dependencies.",
+                        "b. Gradients grow too large during backpropagation.",
+                        "c. Gradients shrink exponentially over long sequences.",
+                        "d. RNNs cannot process variable-length sequences."
+                    ],
+                    "answer": "c",
+                    "solution": "Please refer to slides."
+                },
+                {
+                    "id": "w5_q2",
+                    "question": "In an attention mechanism, what does the softmax function ensure?",
+                    "options": [
+                        "a. Normalization of decoder outputs",
+                        "b. Stability of gradients during backpropagation",
+                        "c. Values lie between -1 and 1",
+                        "d. Attention weights sum to 1"
+                    ],
+                    "answer": "d",
+                    "solution": "The softmax is applied to attention scores to produce a probability distribution over encoder hidden states. This ensures the weights sum to 1."
+                },
+                {
+                    "id": "w5_q3",
+                    "question": "Which of the following is true about the difference between a standard RNN and an LSTM?",
+                    "options": [
+                        "a. LSTM does not use any non-linear activation.",
+                        "b. LSTM has a gating mechanism to control information flow.",
+                        "c. RNNs have fewer parameters than LSTMs because they use convolution.",
+                        "d. LSTMs cannot learn long-term dependencies."
+                    ],
+                    "answer": "b",
+                    "solution": "Please refer to slides."
+                },
+                {
+                    "id": "w5_q4",
+                    "question": "Which gate in an LSTM is responsible for deciding how much of the cell state to keep?",
+                    "options": [
+                        "a. Forget gate",
+                        "b. Input gate",
+                        "c. Output gate",
+                        "d. Cell candidate gate"
+                    ],
+                    "answer": "a",
+                    "solution": "The forget gate determines what fraction of the previous cell state should be retained in the current timestep."
+                },
+                {
+                    "id": "w5_q5",
+                    "question": "What improvement does attention bring to the basic Seq2Seq model?",
+                    "options": [
+                        "a. Reduces training time",
+                        "b. Removes the need for an encoder",
+                        "c. Allows access to all encoder states during decoding",
+                        "d. Reduces the number of model parameters"
+                    ],
+                    "answer": "c",
+                    "solution": "Attention allows the decoder to consider all encoder hidden states dynamically."
+                },
+                {
+                    "id": "w5_q6",
+                    "question": "Which of the following is a correct statement about the encoder-decoder architecture?",
+                    "options": [
+                        "a. The encoder generates tokens one at a time.",
+                        "b. The decoder summarizes the input sequence.",
+                        "c. The decoder generates outputs based on encoder representations and its own prior outputs.",
+                        "d. The encoder stores only the first token of the sequence."
+                    ],
+                    "answer": "c",
+                    "solution": "The decoder uses both the encoder's output and its own previously generated tokens to produce the next output."
+                },
+                {
+                    "id": "w5_q7",
+                    "question": "What is self-attention in Transformers used for?",
+                    "options": [
+                        "a. To enable sequential computation",
+                        "b. To attend to the previous layer's output",
+                        "c. To relate different positions in the same sequence",
+                        "d. To enforce fixed-length output"
+                    ],
+                    "answer": "c",
+                    "solution": "Self-attention allows each token to focus on all other tokens in the same sequence."
+                },
+                {
+                    "id": "w5_q8",
+                    "question": "Why are RNNs preferred over fixed-window neural models?",
+                    "options": [
+                        "a. They have a smaller parameter size.",
+                        "b. They can process sequences of arbitrary length.",
+                        "c. They eliminate the need for embedding layers.",
+                        "d. None of the above."
+                    ],
+                    "answer": "b",
+                    "solution": "Please refer to lecture slides."
+                },
+                {
+                    "id": "w5_q9",
+                    "question": "Given the following encoder and decoder hidden states, compute the attention scores. (Use dot product as the scoring function)\nEncoder hidden states: $h1=[7,3]$, $h2=[0,2]$, $h3=[1,4]$\nDecoder hidden state: $s=[0.2,1.5]$",
+                    "options": [
+                        "a. 0.42, 0.02, 0.56",
+                        "b. 0.15, 0.53, 0.32",
+                        "c. 0.64, 0.18, 0.18",
+                        "d. 0.08, 0.91, 0.01"
+                    ],
+                    "answer": "a",
+                    "solution": "$e1=7*0.2+3*1.5=5.9$, $e2=0*0.2+2*1.5=3$, $e3=1*0.2+4*1.5=6.2$. $\\alpha_1=e^{5.9}/(e^{5.9}+e^{3}+e^{6.2})=0.42$"
+                }
+            ]
+        },
+        {
+            "week_number": 6,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w6_q1",
+                    "question": "True or False: ROPE uses additive embeddings like sinusoidal encoding.",
+                    "options": [
+                        "True",
+                        "False"
+                    ],
+                    "answer": "False",
+                    "solution": "Please refer to slides."
+                },
+                {
+                    "id": "w6_q2",
+                    "question": "Which of the following is true about multi-head attention?",
+                    "options": [
+                        "a. It increases model interpretability by using a single set of attention weights",
+                        "b. Each head operates on different parts of the input in parallel",
+                        "c. It reduces the number of parameters in the model",
+                        "d. Heads are averaged before applying the softmax function"
+                    ],
+                    "answer": "b",
+                    "solution": "Each attention head processes different learned projections of the input, enabling the model to capture different features."
+                },
+                {
+                    "id": "w6_q3",
+                    "question": "What is the role of the residual connection in the Transformer architecture?",
+                    "options": [
+                        "a. Improve gradient flow during backpropagation",
+                        "b. Normalize input embeddings",
+                        "c. Reduce computational complexity",
+                        "d. Prevent overfitting"
+                    ],
+                    "answer": "a",
+                    "solution": "Please refer to lecture slides."
+                },
+                {
+                    "id": "w6_q4",
+                    "question": "True or False: The feedforward network in a Transformer block introduces non-linearity between attention layers.",
+                    "options": [
+                        "True",
+                        "False"
+                    ],
+                    "answer": "True",
+                    "solution": "Please refer to lecture slides."
+                },
+                {
+                    "id": "w6_q5",
+                    "question": "Fill in the blank: The sinusoidal positional encoding uses sine for even dimensions and ______ for odd dimensions.",
+                    "options": [
+                        "a. sine",
+                        "b. cosine",
+                        "c. tangent",
+                        "d. None of these"
+                    ],
+                    "answer": "b",
+                    "solution": "Please refer to lecture slides."
+                },
+                {
+                    "id": "w6_q6",
+                    "question": "Why is positional encoding added to input embeddings in Transformers?",
+                    "options": [
+                        "a. To provide unique values for each word",
+                        "b. To indicate the position of tokens since Transformers are non-sequential",
+                        "c. To scale embeddings",
+                        "d. To avoid vanishing gradients"
+                    ],
+                    "answer": "b",
+                    "solution": "Please refer to lecture slides."
+                },
+                {
+                    "id": "w6_q7",
+                    "question": "You are given a self-attention layer with input dimension 512, using 8 heads. What is the output dimension per head?",
+                    "options": [
+                        "a. 64",
+                        "b. 128",
+                        "c. 32",
+                        "d. 256"
+                    ],
+                    "answer": "a",
+                    "solution": "Each head processes $512/8=64$ dimensions"
+                },
+                {
+                    "id": "w6_q8",
+                    "question": "For a transformer with $d_{model}=512$, calculate the positional encoding for position $p=14$ and dimensions 6 and 7 using the sinusoidal formula:\n$PE(p,2i)=sin(\\frac{p}{10000^{2i/d_{model}}})$\n$PE(p,2i+1)=cos(\\frac{p}{10000^{2i/d_{model}}})$",
+                    "options": [
+                        "a. $sin(\\frac{14}{10000^{3/256}}), cos(\\frac{14}{10000^{3/256}})$",
+                        "b. $cos(\\frac{14}{10000^{6/256}}), sin(\\frac{14}{10000^{7/256}})$",
+                        "c. $cos(\\frac{14}{10000^{3/256}}), sin(\\frac{14}{10000^{3/256}})$",
+                        "d. $sin(\\frac{14}{10000^{3/512}}), cos(\\frac{14}{10000^{3/256}})$"
+                    ],
+                    "answer": "a",
+                    "solution": "For dimension 6 ($2i$), $i=3$. $PE(14,6)=sin(\\frac{14}{10000^{6/512}})=sin(\\frac{14}{10000^{3/256}})$.\nFor dimension 7 ($2i+1$), $i=3$. $PE(14,7)=cos(\\frac{14}{10000^{3/256}})$"
+                }
+            ]
+        },
+        {
+            "week_number": 7,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w7_q1",
+                    "question": "Why can a pre-trained BART model be fine-tuned directly for abstractive summarization?",
+                    "options": [
+                        "a) Its encoder alone is sufficient.",
+                        "b) It shares vocabulary with summarization datasets.",
+                        "c) It uses a larger context window than BERT.",
+                        "d) It already contains a generative decoder trained jointly during pre-training."
+                    ],
+                    "answer": "d",
+                    "solution": "BART (Bidirectional and Auto-Regressive Transformer) is explicitly designed as an encoder-decoder model. Its pre-training process jointly trains a bidirectional encoder and an autoregressive decoder."
+                },
+                {
+                    "id": "w7_q2",
+                    "question": "For pre-training of encoder-decoder models, which statement(s) is/are true?",
+                    "options": [
+                        "a) The encoder attends bidirectionally to its whole input.",
+                        "b) The decoder conditions on earlier decoder tokens and encoder outputs.",
+                        "c) Unlabelled text is turned into a supervised task via a noising scheme.",
+                        "d) Training relies on a next-sentence-prediction loss."
+                    ],
+                    "answer": "a, b, c",
+                    "solution": "Encoder-decoder models like BART and T5 use denoising/span-corruption objectives, not NSP. The encoder is bidirectional, and the decoder uses causal self-attention and cross-attention."
+                },
+                {
+                    "id": "w7_q3",
+                    "question": "Which attention mask(s) prevent(s) a token from looking at future positions?",
+                    "options": [
+                        "a) Causal mask",
+                        "b) Fully-visible mask",
+                        "c) Prefix-LM mask",
+                        "d) All of the above",
+                        "e) None of the above"
+                    ],
+                    "answer": "a, c",
+                    "solution": "A causal mask ensures a token can only attend to previous positions. A Prefix-LM mask applies a causal mask to the suffix (output) part of the sequence."
+                },
+                {
+                    "id": "w7_q4",
+                    "question": "T5 experiments showed that clean and compact pre-training data can outperform a larger but noisier corpus primarily because:",
+                    "options": [
+                        "A. Larger corpora overfit.",
+                        "B. Noise forces the model to waste capacity on modelling irrelevant patterns.",
+                        "C. Clean data has longer documents.",
+                        "D. Compact data allows bigger batches."
+                    ],
+                    "answer": "b",
+                    "solution": "A model trained on noisy data must use a portion of its finite capacity to learn patterns in the noise, which is then unavailable for learning useful natural language patterns."
+                },
+                {
+                    "id": "w7_q5",
+                    "question": "What makes sampling from an auto-regressive language model straightforward?",
+                    "options": [
+                        "A. The model is deterministic.",
+                        "B. The vocabulary is small.",
+                        "C. Each conditional distribution over the vocabulary is readily normalised and can be sampled token-by-token.",
+                        "D. Beam search guarantees optimality."
+                    ],
+                    "answer": "c",
+                    "solution": "At each step, the model produces a normalized probability distribution (via softmax) over the vocabulary, allowing for straightforward token-by-token sampling."
+                },
+                {
+                    "id": "w7_q6",
+                    "question": "Why does ELMo build its input token representations from a character-level CNN instead of fixed word embeddings?",
+                    "options": [
+                        "A. To reduce training time by sharing parameters",
+                        "B. To avoid UNK tokens and generate representations for any string",
+                        "C. To compress embeddings to 128 dimensions",
+                        "D. To ensure the same vector for a word in every context"
+                    ],
+                    "answer": "b",
+                    "solution": "By building representations from characters, ELMo can compose a unique vector for any word, including rare or OOV words, avoiding 'UNK' tokens."
+                },
+                {
+                    "id": "w7_q7",
+                    "question": "The einsum function in numpy is used as a generalized operation for performing tensor multiplications. Now, consider two matrices: $A=\\begin{bmatrix}2&8\\\\ 4&3\\end{bmatrix}$ and $B=\\begin{bmatrix}-9&9\\\\ 0&11\\end{bmatrix}$. What is the output of the following numpy operation?\n`numpy.einsum('ij,ij->', A, B)`",
+                    "options": [],
+                    "answer": "87",
+                    "solution": "The operation performs element-wise multiplication and then sums the results: $(2*-9) + (8*9) + (4*0) + (3*11) = -18 + 72 + 0 + 33 = 87$."
+                }
+            ]
+        },
+        {
+            "week_number": 8,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w8_q1",
+                    "question": "In standard instruction tuning with a decoder-only LM, which tokens typically contribute to the next-token prediction loss?",
+                    "options": [
+                        "a) Only the prompt tokens",
+                        "b) Only the response tokens",
+                        "c) Both prompt and response tokens",
+                        "d) Neither; loss is computed at the sequence level only"
+                    ],
+                    "answer": "b",
+                    "solution": "The loss is only calculated for the response tokens. The prompt tokens serve as conditioning context."
+                },
+                {
+                    "id": "w8_q2",
+                    "question": "Why can using multiple instruction templates for the same task help?",
+                    "options": [
+                        "a) It only increases the dataset size.",
+                        "b) It regularizes the reward model.",
+                        "c) It improves generalization by exposing the model to different phrasings of the instruction.",
+                        "d) It ensures the same tokenization across tasks."
+                    ],
+                    "answer": "c",
+                    "solution": "Rephrasing helps the model learn and generalize more effectively to new, unseen instructions at test time."
+                },
+                {
+                    "id": "w8_q3",
+                    "question": "As the model size grows, what happens to prompt length and initialization sensitivity in prompt tuning?",
+                    "options": [
+                        "a) Both matter more.",
+                        "b) Both matter less.",
+                        "c) Length matters less but initialization matters more.",
+                        "d) Initialization matters less but length matters more."
+                    ],
+                    "answer": "b",
+                    "solution": "As models scale, they become more robust, so performance converges regardless of prompt length or initialization method."
+                },
+                {
+                    "id": "w8_q4",
+                    "question": "Which of the following statement(s) is/are true about the POSIX metric for quantifying prompt sensitivity?",
+                    "options": [
+                        "a) POSIX is independent of the correctness of the generated responses and captures sensitivity as a property independent of correctness",
+                        "b) POSIX is a length-normalized metric",
+                        "c) POSIX compares the generated responses against the ground-truth to quantify prompt sensitivity",
+                        "d) POSIX captures the variance in the log-likelihood of the same response for different input prompt variations"
+                    ],
+                    "answer": "a, b, d",
+                    "solution": "POSIX measures stability of output probabilities across prompt variations, includes length normalization, and does not use ground-truth labels."
+                },
+                {
+                    "id": "w8_q5",
+                    "question": "Which statement is true about prompt sensitivity as captured by POSIX?",
+                    "options": [
+                        "a) Larger models always have lower prompt sensitivity than smaller ones.",
+                        "b) Larger models always have higher prompt sensitivity than smaller ones.",
+                        "c) Prompt sensitivity decreases for models with a parameter count above a certain threshold.",
+                        "d) Increasing parameter count does not necessarily reduce prompt sensitivity."
+                    ],
+                    "answer": "d",
+                    "solution": "Experimental results show that larger models (e.g., Llama-2 13B vs 7B) do not always have lower sensitivity."
+                },
+                {
+                    "id": "w8_q6",
+                    "question": "In training a reward model with pairwise preferences $(x,y^{+},y^{-})$, the Bradley-Terry style objective encourages:",
+                    "options": [
+                        "a) Maximizing $r_\\theta(x, y) - r_\\theta(x, y^+)$",
+                        "b) Minimizing the entropy of the policy",
+                        "c) Maximizing $\\log \\sigma(r_\\theta(x, y^+) - r_\\theta(x, y^-))$",
+                        "d) Setting $r_{\\theta}(x,y)$ equal to the log-probability under $\\pi_{ref}$"
+                    ],
+                    "answer": "c",
+                    "solution": "The objective is to maximize the log-probability of the preferred response having a higher score than the rejected response."
+                },
+                {
+                    "id": "w8_q7",
+                    "question": "Which of the following are recommended while performing REINFORCE-style policy optimization?",
+                    "options": [
+                        "a) Use the log-derivative trick to obtain an unbiased gradient estimator.",
+                        "b) Weight token-level log-probs by the advantage function to reduce variance.",
+                        "c) Use importance weights and clip them when sampling from a fixed policy.",
+                        "d) Avoid any clipping to preserve gradient magnitude."
+                    ],
+                    "answer": "a, b, c",
+                    "solution": "Clipping importance weights (as in PPO) is crucial for stability, contradicting option (d)."
+                },
+                {
+                    "id": "w8_q8",
+                    "question": "Which method combines reward maximization and minimizing KL divergence?",
+                    "options": [
+                        "a) REINFORCE",
+                        "b) Monte Carlo Approximation",
+                        "c) Proximal Policy Optimization",
+                        "d) Constitutional AI"
+                    ],
+                    "answer": "c",
+                    "solution": "Proximal Policy Optimization (PPO) uses a clipped surrogate objective that balances reward seeking with policy stability (KL constraint)."
+                },
+                {
+                    "id": "w8_q9",
+                    "question": "Which of the following is the reason for performing alignment beyond instruction tuning in LLMs?",
+                    "options": [
+                        "a) Instruction tuning guarantees safety on harmful queries.",
+                        "b) Alignment can prevent outputs that a model might otherwise deem correct, but humans find unacceptable.",
+                        "c) Alignment is only needed for small models.",
+                        "d) Instruction tuning already optimizes a human preference model."
+                    ],
+                    "answer": "b",
+                    "solution": "Alignment (like RLHF) uses human preference data to prevent outputs that humans consider wrong or harmful, which instruction tuning alone cannot reliably prevent."
+                },
+                {
+                    "id": "w8_q10",
+                    "question": "Let $\\pi_{\\theta}$ be the probability of choosing token $a_{t}$ in state $s_{t}$ assigned by the current policy being optimized, $\\pi_{k}$ be that by the old/reference policy and $\\epsilon>0$ be the clip parameter. When the token-level advantage $A_{t}$ is positive, PPO-CLIP maximizes which of the following expression at step t?",
+                    "options": [
+                        "a) $max(\\frac{\\pi_{\\theta}}{\\pi_{k}}, 1-\\epsilon) A_{t}$",
+                        "b) $max(\\frac{\\pi_{k}}{\\pi_{\\theta}}, 1-\\epsilon) A_{t}$",
+                        "c) $min(\\frac{\\pi_{k}}{\\pi_{\\theta}}, 1+\\epsilon) A_{t}$",
+                        "d) $min(\\frac{\\pi_{\\theta}}{\\pi_{k}}, 1+\\epsilon) A_{t}$"
+                    ],
+                    "answer": "d",
+                    "solution": "The algorithm takes the minimum of the actual ratio and the clipped ratio $(1+\\epsilon)$ when the advantage is positive to prevent the policy from changing too drastically."
+                }
+            ]
+        },
+        {
+            "week_number": 9,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w9_q1",
+                    "question": "In the knowledge-graph training pipeline that models $P(o|s,r)$ with a softmax over all entities, what practical difficulty motivates the use of negative sampling?",
+                    "options": [
+                        "a. The softmax is undefined for KG scores.",
+                        "b. The denominator sums over all entities, which is computationally expensive.",
+                        "c. The numerator requires the full adjacency list for each relation.",
+                        "d. The scores must be normalized per relation rather than globally."
+                    ],
+                    "answer": "b",
+                    "solution": "The denominator requires summing over all entities (millions), making it computationally intractable. Negative sampling approximates this."
+                },
+                {
+                    "id": "w9_q2",
+                    "question": "Which statements correctly characterize the local closed-world assumption in KG training with negative sampling?",
+                    "options": [
+                        "a. Any unobserved triple is treated as false for training purposes.",
+                        "b. It is strictly correct because KGs are exhaustive.",
+                        "c. It helps training but may mislabel genuinely missing positives as negatives.",
+                        "d. It eliminates the need for development/test splits."
+                    ],
+                    "answer": "a, c",
+                    "solution": "Unobserved triples are treated as false. Since KGs are incomplete, this may incorrectly label missing true facts as negative, but it is a necessary approximation."
+                },
+                {
+                    "id": "w9_q3",
+                    "question": "For discriminative training, why is it infeasible to enforce all constraints $f(s,r,o) \\ge m + f(s',r,o')$ over every possible negative triple?",
+                    "options": [
+                        "a. The number of possible facts is $O(E^{2}R)$, overwhelmingly larger than positives.",
+                        "b. Because scores cannot be compared across relations.",
+                        "c. Because margins must be tuned per entity.",
+                        "d. Because negatives are always ambiguous."
+                    ],
+                    "answer": "a",
+                    "solution": "The total number of possible triples is astronomically large ($E^2R$), making it impossible to compute loss for every potential negative."
+                },
+                {
+                    "id": "w9_q4",
+                    "question": "Which statement best describes score polarity in KG models?",
+                    "options": [
+                        "a. Scores must always be larger for false triples.",
+                        "b. Score polarity is fixed by the dataset.",
+                        "c. Some models use higher scores for more plausible triples; others use lower, and probabilities/losses can be adapted accordingly.",
+                        "d. Polarity only matters for RotatE."
+                    ],
+                    "answer": "c",
+                    "solution": "The choice depends on model design (e.g., dot-product models use higher scores, distance-based models like TransE use lower scores)."
+                },
+                {
+                    "id": "w9_q5",
+                    "question": "Compared to semantic interpretation (logical-form execution), a differentiable KGQA system:",
+                    "options": [
+                        "a. Requires a hand-coded logical form for every question.",
+                        "b. Cannot be trained end-to-end.",
+                        "c. Provides complete interpretability of reasoning steps.",
+                        "d. Learns dense question and graph embeddings and uses cross-attention to align them."
+                    ],
+                    "answer": "d",
+                    "solution": "Differentiable KGQA avoids explicit logical forms, using dense embeddings for questions and graph elements, allowing end-to-end training."
+                },
+                {
+                    "id": "w9_q6",
+                    "question": "Which statements correctly describe filtered evaluation?",
+                    "options": [
+                        "a. It removes candidates that are true facts in train/dev from the ranked list before scoring the test query.",
+                        "b. It increases fairness by not penalizing the model for ranking another correct answer that happened to be in training data.",
+                        "c. It always decreases MRR.",
+                        "d. It affects measures like MRR and MAP."
+                    ],
+                    "answer": "a, b, d",
+                    "solution": "Filtered evaluation removes known true positives from the candidates to prevent penalizing the model for ranking valid training facts higher than the test fact."
+                },
+                {
+                    "id": "w9_q7",
+                    "question": "Which of the following best captures the motivation for KG completion?",
+                    "options": [
+                        "a. KGs are complete; KG completion mainly compresses them.",
+                        "b. Manual curation keeps KGs fully up-to-date.",
+                        "c. KGs are useful but incomplete, so we learn embeddings and a scoring function to infer missing facts.",
+                        "d. KG completion is only for alignment across languages."
+                    ],
+                    "answer": "c",
+                    "solution": "Manual curation cannot keep up with all knowledge, so KGs are incomplete. Completion aims to infer missing facts automatically."
+                },
+                {
+                    "id": "w9_q8",
+                    "question": "Consider pairwise hinge/ReLU loss for discriminative training with margin m: $max\\{ 0, m + f(s'_k,r,o'_k)-f(s,r,o)\\}$. When does this loss become exactly zero for a given negative $(s'_k, r, o'_k)$?",
+                    "options": [
+                        "a. When $f(s, r, o) \\ge m + f(s'_k, r, o'_k)$",
+                        "b. When $f(s, r, o) = f(s'_k, r, o'_k)$",
+                        "c. When $f(s'_k, r, o'_k) \\ge m + f(s, r, o)$",
+                        "d. Only when $m=0$"
+                    ],
+                    "answer": "a",
+                    "solution": "The loss is zero when the argument is $\\le 0$, which rearranges to $f(s,r,o) \\ge m + f(s'_k,r,o'_k)$."
+                },
+                {
+                    "id": "w9_q9",
+                    "question": "Uniform negative sampling can introduce an extra bias unless you do which of the following when forming the sampled denominator?",
+                    "options": [
+                        "a. Exclude the true object o from the denominator.",
+                        "b. Normalize scores per relation type.",
+                        "c. Sample only from entities not connected to s.",
+                        "d. Always include the true object o in the denominator."
+                    ],
+                    "answer": "d",
+                    "solution": "To get a better-behaved estimate and reduce bias, the true object $o$ must be explicitly included in the sampled denominator."
+                },
+                {
+                    "id": "w9_q10",
+                    "question": "Which of the following is the RotatE scoring function?",
+                    "options": [
+                        "a. $f(s, r, o) = ||s+r-o||^2$",
+                        "b. $f(s,r,o)=||s\\odot r-o||^{2}$ where r lies on the unit circle element-wise",
+                        "c. $f(s,r,o)=s^{T}R_{r}o$ with $R_{r}$ orthonormal",
+                        "d. $f(s,r,o)=-\\langle s,r,o\\rangle$"
+                    ],
+                    "answer": "b",
+                    "solution": "RotatE represents relations as rotations in complex space, constrained to unit magnitude ($|r_d|=1$)."
+                }
+            ]
+        },
+        {
+            "week_number": 10,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w10_q1",
+                    "question": "How do Prefix Tuning and Adapters differ in terms of where they inject new task-specific parameters in the Transformer architecture?",
+                    "options": [
+                        "a. Prefix Tuning adds new feed-forward networks after every attention block, while Adapters prepend tokens.",
+                        "b. Both approaches modify only the final output layer but in different ways.",
+                        "c. Prefix Tuning learns trainable \"prefix\" hidden states at each layer's input, whereas Adapters insert small bottleneck modules inside the Transformer blocks.",
+                        "d. Both approaches rely entirely on attention masks to inject new task-specific knowledge."
+                    ],
+                    "answer": "c",
+                    "solution": "Prefix Tuning adds trainable 'prefix' embeddings at the input side of each layer, while Adapters add small modules inside the architecture."
+                },
+                {
+                    "id": "w10_q2",
+                    "question": "The Structure-Aware Intrinsic Dimension (SAID) improves over earlier low-rank adaptation approaches by:",
+                    "options": [
+                        "a. Ignoring the network structure entirely",
+                        "b. Learning one scalar per layer for layer-wise scaling",
+                        "c. Sharing the same random matrix across all layers",
+                        "d. Using adapters within self-attention layers"
+                    ],
+                    "answer": "b",
+                    "solution": "SAID captures global scaling behavior across layers with minimal parameters, often including one scalar per layer."
+                },
+                {
+                    "id": "w10_q3",
+                    "question": "Which of the following are correct about the extensions of LoRA?",
+                    "options": [
+                        "a. LongLoRA supports inference on longer sequences using global attention",
+                        "b. QLoRA supports low-rank adaptation on 4-bit quantized models",
+                        "c. DyLoRA automatically selects the optimal rank during training",
+                        "d. LoRA+ introduces gradient clipping to stabilize training"
+                    ],
+                    "answer": "b, c",
+                    "solution": "QLoRA enables fine-tuning on quantized models. DyLoRA dynamically picks the optimal rank during training."
+                },
+                {
+                    "id": "w10_q4",
+                    "question": "Which pruning technique specifically removes weights with the smallest absolute values first, potentially followed by retraining to recover accuracy?",
+                    "options": [
+                        "a. Magnitude Pruning",
+                        "b. Structured Pruning",
+                        "c. Random Pruning",
+                        "d. Knowledge Distillation"
+                    ],
+                    "answer": "a",
+                    "solution": "Magnitude Pruning removes weights whose absolute values are below a certain threshold."
+                },
+                {
+                    "id": "w10_q5",
+                    "question": "In Post-Training Quantization (PTQ) for LLMs, why is a calibration dataset used?",
+                    "options": [
+                        "a. To precompute the entire attention matrix for all tokens.",
+                        "b. To remove outlier dimensions before applying magnitude-based pruning.",
+                        "c. To fine-tune the entire model on a small dataset and store the new weights.",
+                        "d. To estimate scale factors for quantizing weights and activations under representative data conditions."
+                    ],
+                    "answer": "d",
+                    "solution": "The calibration dataset helps extract distribution statistics to set the quantization scale and zero points."
+                },
+                {
+                    "id": "w10_q6",
+                    "question": "Which best summarizes the function of the unembedding matrix $W_{U}$?",
+                    "options": [
+                        "a. It merges the queries and keys for each token before final classification.",
+                        "b. It converts the final residual vector into vocabulary logits for next-token prediction.",
+                        "c. It is used for normalizing the QK and OV circuits so that their norms match.",
+                        "d. It acts as a second attention layer that aggregates multiple heads."
+                    ],
+                    "answer": "b",
+                    "solution": "The unembedding matrix maps the final hidden state to a distribution over the vocabulary."
+                },
+                {
+                    "id": "w10_q7",
+                    "question": "Which definition best matches an induction head as discovered in certain Transformer circuits?",
+                    "options": [
+                        "a. A head that specifically attends to punctuation tokens to determine sentence boundaries",
+                        "b. A feed-forward sub-layer specialized for outputting next-token probabilities for out-of-distribution tokens",
+                        "c. A head that looks for previous occurrences of a token A, retrieves the token B that followed it last time, and then predicts B again",
+                        "d. A masking head that prevents the model from looking ahead at future tokens"
+                    ],
+                    "answer": "c",
+                    "solution": "Induction heads implement a pattern of copying tokens that followed a specific token in the past context."
+                },
+                {
+                    "id": "w10_q8",
+                    "question": "In mechanistic interpretability, how can we define 'circuit'?",
+                    "options": [
+                        "a. A data pipeline for collecting training examples in an autoregressive model",
+                        "b. A small LSTM module inserted into a Transformer for additional memory",
+                        "c. A device external to the neural network used to fine-tune certain parameters after training",
+                        "d. A subgraph of the neural network hypothesized to implement a specific function or behaviour"
+                    ],
+                    "answer": "d",
+                    "solution": "A circuit is a subgraph of a neural network (specific connections and components) that collectively implement a certain interpretable function."
+                },
+                {
+                    "id": "w10_q9",
+                    "question": "Which best describes the role of Double Quantization in QLORA?",
+                    "options": [
+                        "a. It quantizes the attention weights twice to achieve 1-bit representations.",
+                        "b. It reinitializes parts of the model with random bit patterns for improved regularization.",
+                        "c. It quantizes the quantization constants themselves for additional memory savings.",
+                        "d. It systematically reverts partial quantized weights back to FP16 whenever performance degrades."
+                    ],
+                    "answer": "c",
+                    "solution": "Double Quantization quantizes the scaling factors (quantization constants) themselves to reduce memory usage further."
+                },
+                {
+                    "id": "w10_q10",
+                    "question": "Which of the following are true about sequence-level distillation for LLMs?",
+                    "options": [
+                        "a. It trains a student model by matching the teacher's sequence outputs (e.g., predicted token sequences) rather than just individual token distributions.",
+                        "b. It requires storing only the top-1 predictions from the teacher model for each token.",
+                        "c. It can be combined with word-level distillation to transfer both local and global knowledge.",
+                        "d. It forces the teacher to produce a chain-of-thought explanation for each example."
+                    ],
+                    "answer": "a, c",
+                    "solution": "Sequence-level distillation matches the teacher's full sequence outputs and can be combined with word-level distillation."
+                }
+            ]
+        },
+        {
+            "week_number": 11,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w11_q1",
+                    "question": "Assume that you build a document-term matrix M (rows: documents; columns: words) and take its thin SVD $M=U\\Sigma V^{T}$. Which statement is most accurate for interpreting V in classical Latent Semantic Analysis (LSA)?",
+                    "options": [
+                        "a. Columns of V (and rows of $V^T$) give low-dimensional word representations that capture co-occurrence similarity.",
+                        "b. V gives only document embeddings; words are in U.",
+                        "c. V and U are not orthonormal in LSA.",
+                        "d. $\\Sigma$ can be ignored without affecting similarity."
+                    ],
+                    "answer": "a",
+                    "solution": "The rows of $V^T$ (or columns of V) are the word embeddings. $U$ relates to documents."
+                },
+                {
+                    "id": "w11_q2",
+                    "question": "Which statements correctly characterize the basic DistMult approach for knowledge graph completion?",
+                    "options": [
+                        "a. Each relation r is parameterized by a full $D\\times D$ matrix that can capture asymmetric relations.",
+                        "b. The relation embedding is a diagonal matrix, leading to a multiplicative interaction of entity embeddings.",
+                        "c. DistMult struggles with non-symmetric relations because score $(s,r,o)={a_{s}}^{T}M_{r}a_{o}$ is inherently symmetric in s and o.",
+                        "d. DistMult's performance is typically tested only on fully symmetric KGs."
+                    ],
+                    "answer": "b, c",
+                    "solution": "DistMult uses a diagonal matrix for relations ($f(s,r,o)=\\Sigma_{d}s_{d}r_{d}o_{d}$), making the score symmetric and thus unable to effectively model asymmetric relations."
+                },
+                {
+                    "id": "w11_q3",
+                    "question": "Given a doc-term matrix M, what do $M^TM$ and $MM^T$ capture?",
+                    "options": [
+                        "a. $M^TM$: word-word co-occurrence similarity across documents",
+                        "b. $MM^T$: document-document similarity via shared terms",
+                        "c. Both are identity matrices by construction",
+                        "d. $M^TM$ counts how often a word appears in the corpus total"
+                    ],
+                    "answer": "a, b",
+                    "solution": "$M^TM$ elements are dot products of word vectors (co-occurrence). $MM^T$ elements are dot products of document vectors (doc similarity)."
+                },
+                {
+                    "id": "w11_q4",
+                    "question": "Which best describes the main advantage of using a factorized representation (e.g., DistMult, ComplEx) for large KGs?",
+                    "options": [
+                        "a. It enforces that every relation in the KG be perfectly symmetric.",
+                        "b. It ensures each entity is stored as a one-hot vector, simplifying nearest-neighbour queries.",
+                        "c. It collapses the entire KG into a single scalar value.",
+                        "d. It significantly reduces parameters and enables generalization to unseen triples by capturing low-rank structure."
+                    ],
+                    "answer": "d",
+                    "solution": "Factorization reduces parameters (from $O(E^2R)$ to embedding size) and allows generalizing to unseen triples."
+                },
+                {
+                    "id": "w11_q5",
+                    "question": "Which statement best describes the reshaping of a 3D KG tensor $X\\in R^{|E|\\times|R|\\times|E|}$ into a matrix factorization problem?",
+                    "options": [
+                        "a. One axis remains for subject, one axis remains for object, and relations are combined into a single expanded axis.",
+                        "b. The subject dimension is repeated to match the relation dimension, resulting in a 2D matrix.",
+                        "c. Each subject-relation pair is collapsed into a single dimension, while objects remain as separate entries.",
+                        "d. The entire KG is vectorized into a 1D array and then factorized with an SVD approach."
+                    ],
+                    "answer": "c",
+                    "solution": "Common reshaping treats the task as predicting the object given a (subject, relation) pair, resulting in a $(|E|\\times|R|)\\times|E|$ matrix."
+                },
+                {
+                    "id": "w11_q6",
+                    "question": "SimplE addresses asymmetry by:",
+                    "options": [
+                        "a. Using separate subject and object embeddings per entity and including inverse relations, with an averaged score over the two directions",
+                        "b. Constraining relation vectors to unit modulus",
+                        "c. Replacing dot-products by max-pooling",
+                        "d. Removing inverse relations entirely"
+                    ],
+                    "answer": "a",
+                    "solution": "SimplE learns two vectors per entity (subject/object role) and explicitly introduces inverse relations to handle asymmetry."
+                },
+                {
+                    "id": "w11_q7",
+                    "question": "Which of the following statements correctly describe hyperbolic (Poincare) embeddings for hierarchical data?",
+                    "options": [
+                        "a. They map nodes onto a disk (or ball) such that large branching factors can be represented with lower distortion than in Euclidean space.",
+                        "b. Distance grows slowly near the center and becomes infinite near the boundary, making it naturally suited for tree-like structures.",
+                        "c. They require each node to be embedded on the surface of the Poincare disk of radius 1.",
+                        "d. They can achieve arbitrarily low distortion embeddings for trees with the same dimension as Euclidean space."
+                    ],
+                    "answer": "a, b",
+                    "solution": "Hyperbolic space volume grows exponentially, accommodating tree-like structures with low distortion. Distance increases rapidly near the boundary."
+                },
+                {
+                    "id": "w11_q8",
+                    "question": "Why might a partial-order-based approach (like order embeddings) be beneficial for modelling 'is-a' relationships compared to purely distance-based approaches?",
+                    "options": [
+                        "a. They explicitly encode the ancestor-descendant relation as a coordinate-wise inequality or containment.",
+                        "b. They can represent negative correlations (i.e., sibling vs. ancestor) more easily than distance metrics.",
+                        "c. They inherently guarantee transitive closure of the hierarchy in the learned embedding space.",
+                        "d. They do not rely on pairwise distances but use a notion of coordinate-wise ordering or interval containment."
+                    ],
+                    "answer": "a, d",
+                    "solution": "Order embeddings model partial order ($<$) directly via coordinate-wise inequalities or region containment, rather than symmetric distance."
+                },
+                {
+                    "id": "w11_q9",
+                    "question": "Which statement about box embeddings in hierarchical modelling is most accurate?",
+                    "options": [
+                        "a. Each entity or type is assigned a single real-valued vector, ignoring bounding volumes.",
+                        "b. Containment $I_{x}\\subseteq I_{y}$ all dimensions encodes $x<y$.",
+                        "c. They rely on spherical distances around a central node to measure tree depth.",
+                        "d. They cannot be used to represent set intersections or partial overlap."
+                    ],
+                    "answer": "b",
+                    "solution": "Box embeddings represent entities as hyper-rectangles; hierarchy is encoded by geometric containment of boxes."
+                },
+                {
+                    "id": "w11_q10",
+                    "question": "For order embeddings with axis-aligned open cones:",
+                    "options": [
+                        "a. Represent each item x by apex $u_{x}$; encode $x<y$ as $u_{x}\\ge u_{y}$ (element-wise).",
+                        "b. Positive loss encourages all dimensions to satisfy the order; negative loss enforces at least one dimension to violate it.",
+                        "c. All cones (and their intersections) have the same measure in this construction.",
+                        "d. This makes modeling negative correlation between sibling types difficult."
+                    ],
+                    "answer": "a, b, c, d",
+                    "solution": "All statements describe the open cone model: $u_x \\ge u_y$ for containment, infinite volume (measure) for all cones, and difficulty modeling disjointness (negative correlation)."
+                }
+            ]
+        },
+        {
+            "week_number": 12,
+            "total_marks": 10,
+            "questions": [
+                {
+                    "id": "w12_q1",
+                    "question": "Which statements correctly characterize \"bias\" in the context of LLMs?\n1. Bias can generate objectionable or stereotypical views in model outputs.\n2. Bias is always intentionally introduced by malicious data curators.\n3. Bias can cause harmful real-world impacts such as reinforcing discrimination.\n4. Bias only affects low-resource languages; high-resource languages are unaffected.",
+                    "options": [
+                        "a. 1 and 2",
+                        "b. 1 and 3",
+                        "c. 2 and 4",
+                        "d. 1, 3, and 4"
+                    ],
+                    "answer": "b",
+                    "solution": "Bias can be unintentional (reflecting historical imbalances) and affects all languages."
+                },
+                {
+                    "id": "w12_q2",
+                    "question": "The Stereotype Score (ss) refers to:",
+                    "options": [
+                        "a. The frequency with which a language model rejects biased associations.",
+                        "b. The measure of how often a model's predictions are meaningless as opposed to meaningful.",
+                        "c. A ratio of positive sentiment to negative sentiment in model outputs.",
+                        "d. The proportion of examples in which a model chooses a stereotypical association over an anti-stereotypical one."
+                    ],
+                    "answer": "d",
+                    "solution": "It measures the fraction of test items where the model output aligns with the stereotype."
+                },
+                {
+                    "id": "w12_q3",
+                    "question": "Which of the following are prominent sources of bias in LLMs?\n1. Improper selection of training data leading to skewed distributions.\n2. Reliance on older datasets causing \"temporal bias.\"\n3. Overemphasis on low-resource languages causing \"linguistic inversion.\"\n4. Unequal focus on high-resource languages resulting in \"cultural bias.\"",
+                    "options": [
+                        "a. 1 and 2 only",
+                        "b. 2 and 3 only",
+                        "c. 1, 2, and 4",
+                        "d. 1, 3, and 4"
+                    ],
+                    "answer": "c",
+                    "solution": "Bias stems from skewed data, old data (temporal bias), and focus on high-resource languages (cultural bias). Low-resource languages are typically under-represented."
+                },
+                {
+                    "id": "w12_q4",
+                    "question": "In the context of bias mitigation based on adversarial triggers, which best describes the goal of prepending specially chosen tokens to prompts?",
+                    "options": [
+                        "a. To directly fine-tune the model parameters to remove bias",
+                        "b. To override all prior knowledge in a model, effectively \"resetting\" it",
+                        "c. To exploit the model's distributional patterns, thereby neutralizing or flipping biased associations in generated text",
+                        "d. To randomly shuffle the tokens so that the model becomes more robust"
+                    ],
+                    "answer": "c",
+                    "solution": "Adversarial triggers steer the model's output within its learned distribution to mitigate bias without retraining."
+                },
+                {
+                    "id": "w12_q5",
+                    "question": "Which of the following best describes the \"regard\" metric?",
+                    "options": [
+                        "a. It is a measure of how well a model can explain its internal decision process.",
+                        "b. It is a measurement of a model's perplexity on demographically sensitive text.",
+                        "c. It is the proportion of times a model self-corrects discriminatory language.",
+                        "d. It is a classification label reflecting the attitude towards a demographic group in the generated text."
+                    ],
+                    "answer": "d",
+                    "solution": "Regard measures the sentiment/attitude (positive, negative, neutral) towards a demographic group."
+                },
+                {
+                    "id": "w12_q6",
+                    "question": "Which of the following steps compose the approach for improving response safety via in-context learning?",
+                    "options": [
+                        "a. Retrieving safety demonstrations similar to the user query.",
+                        "b. Fine-tuning the model with additional labeled data after generation.",
+                        "c. Providing retrieved demonstrations as examples in the prompt to guide the model's response generation.",
+                        "d. Sampling multiple outputs from LLMs and choosing the majority opinion."
+                    ],
+                    "answer": "a, c",
+                    "solution": "The method involves retrieving safe examples and including them in the prompt to guide generation."
+                },
+                {
+                    "id": "w12_q7",
+                    "question": "Which statement(s) is/are correct about how high-resource (HRL) vs. low-resource languages (LRL) affect model training?",
+                    "options": [
+                        "a. LRLs typically have higher performance metrics due to smaller population sizes.",
+                        "b. HRLs get more data, so the model might overfit to HRL cultural perspectives.",
+                        "c. LRLs are often under-represented, leading to potential underestimation of their cultural nuances.",
+                        "d. The dominance of HRLs can cause a reinforcing cycle that perpetuates imbalance."
+                    ],
+                    "answer": "b, c, d",
+                    "solution": "LRLs typically have lower performance due to data scarcity. HRL dominance leads to cultural bias and perpetuates imbalance."
+                },
+                {
+                    "id": "w12_q8",
+                    "question": "The \"Responsible LLM\" concept is stated to address:",
+                    "options": [
+                        "a. Only the bias in LLMs",
+                        "b. A set of concerns including explainability, fairness, robustness, and security",
+                        "c. Balancing training costs with carbon footprint",
+                        "d. Implementation of purely rule-based safety filters"
+                    ],
+                    "answer": "b",
+                    "solution": "Responsible LLM research covers fairness, explainability, robustness, security, and safety."
+                },
+                {
+                    "id": "w12_q9",
+                    "question": "Within the StereoSet framework, the icat metric specifically refers to:",
+                    "options": [
+                        "a. The ratio of anti-stereotypical associations to neutral associations",
+                        "b. The percentage of times a model refuses to generate content deemed hateful",
+                        "c. A measure of domain coverage across different demographic groups",
+                        "d. A balanced metric capturing both a model's language modelling ability and the tendency to avoid stereotypical bias"
+                    ],
+                    "answer": "d",
+                    "solution": "icat balances contextual accuracy (language modeling) with reduced stereotyping."
+                },
+                {
+                    "id": "w12_q10",
+                    "question": "Bias due to improper selection of training data typically arises in LLMs when:",
+                    "options": [
+                        "a. Data are selected exclusively from curated, balanced sources with equal representation",
+                        "b. The language model sees only real-time social media feeds without any historical texts",
+                        "c. The training corpus over-represents some topics or groups, creating a skewed distribution",
+                        "d. All data are automatically filtered to remove any demographic markers"
+                    ],
+                    "answer": "c",
+                    "solution": "Improper selection leads to over-representation of certain groups/topics, skewing the model."
+                }
+            ]
+        }
+    ]
+}
