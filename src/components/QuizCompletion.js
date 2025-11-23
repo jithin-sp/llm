@@ -122,10 +122,19 @@ const QuizCompletion = () => {
                                     </div>
                                 ) : (
                                     <div className="bg-blue-100 text-blue-700 px-3 py-2 rounded-lg text-sm font-semibold">
-                                        💪 Keep Practicing!
+                                        💪 Try Again!
                                     </div>
                                 )}
                             </div>
+
+                            {/* Try Again Button */}
+                            <button
+                                onClick={() => router.push(`/quiz/${weekNumber}/${mode}`)}
+                                className="w-full mt-4 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                            >
+                                <ArrowLeft className="w-4 h-4" />
+                                Try Again
+                            </button>
                         </div>
                     </motion.div>
 

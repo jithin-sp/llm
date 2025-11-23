@@ -109,6 +109,19 @@ export async function saveQuizResultsAndUpdateUser(attemptData) {
             timeTaken = null,
         } = attemptData;
 
+        // Validate weekNumber is a valid integer
+        if (weekNumber === undefined || weekNumber === null || isNaN(weekNumber)) {
+            throw new Error(`Invalid weekNumber: ${weekNumber}. Must be a valid integer.`);
+        }
+
+        // Ensure weekNumber is an integer
+        const validWeekNumber = parseInt(weekNumber, 10);
+        if (isNaN(validWeekNumber)) {
+            throw new Error(`weekNumber could not be converted to integer: ${weekNumber}`);
+        }
+
+        console.log('Saving quiz attempt with weekNumber:', validWeekNumber);
+
         // Step 1: Get or create user profile (only once)
         const userProfile = await createOrGetUserProfile(userId, username, email);
 
@@ -120,7 +133,7 @@ export async function saveQuizResultsAndUpdateUser(attemptData) {
             {
                 userId,
                 username,
-                weekNumber,
+                weekNumber: validWeekNumber,
                 mode,
                 totalQuestions,
                 correctAnswers,

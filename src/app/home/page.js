@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Roadmap from '../../components/Roadmap';
 import { useGame } from '../../context/GameContext';
-import { Carrot, Clock, Sparkles } from 'lucide-react';
+import { Carrot, Clock, Sparkles, Trophy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Home() {
@@ -162,7 +162,7 @@ export default function Home() {
             <motion.div
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
-                className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow-xl border border-white/50 flex items-center gap-6 w-[90%] max-w-md justify-between"
+                className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow-xl border border-white/50 flex items-center gap-4 w-[90%] max-w-md justify-between"
             >
                 <div className="flex flex-col">
                     <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Your Journey</span>
@@ -177,9 +177,19 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-2 bg-orange-50 px-3 py-1.5 rounded-xl border border-orange-100">
-                    <Carrot className="w-5 h-5 text-orange-500 fill-orange-500" />
-                    <span className="font-bold text-orange-600">{carrots}</span>
+                <div className="flex items-center gap-2">
+                    <button
+                        onClick={() => router.push('/leaderboard')}
+                        className="p-2 bg-yellow-50 hover:bg-yellow-100 rounded-xl border border-yellow-200 transition-colors"
+                        title="Leaderboard"
+                    >
+                        <Trophy className="w-5 h-5 text-yellow-600" />
+                    </button>
+                    
+                    <div className="flex items-center gap-2 bg-orange-50 px-3 py-1.5 rounded-xl border border-orange-100">
+                        <Carrot className="w-5 h-5 text-orange-500 fill-orange-500" />
+                        <span className="font-bold text-orange-600">{carrots}</span>
+                    </div>
                 </div>
             </motion.div>
 
@@ -230,7 +240,7 @@ export default function Home() {
                             initial={{ scale: 0.8, opacity: 0, y: 50 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.8, opacity: 0, y: 50 }}
-                            className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 w-full max-w-md shadow-2xl border-4 border-yellow-400 relative overflow-hidden"
+                            className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 w-full max-w-md shadow-2xl border-4 border-purple-400 relative overflow-hidden"
                         >
                             {/* Decorative shine effect */}
                             <motion.div
@@ -249,7 +259,11 @@ export default function Home() {
                             <div className="relative z-10">
                                 {/* Castle Icon */}
                                 <div className="text-center mb-4">
-                                    <span className="text-7xl">🏰</span>
+                                    <img 
+                                        src="/castel.png" 
+                                        alt="Castle" 
+                                        className="w-24 h-24 mx-auto object-contain"
+                                    />
                                 </div>
 
                                 <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Ultimate Quiz</h2>
@@ -293,7 +307,7 @@ export default function Home() {
                                         </p>
 
                                         {/* Cost Display */}
-                                        <div className="bg-white/80 rounded-xl p-4 mb-6 text-center border-2 border-yellow-300">
+                                        <div className="bg-white/80 rounded-xl p-4 mb-6 text-center border-2 border-purple-300">
                                             {isSpecialOffer ? (
                                                 <>
                                                     <div className="text-gray-400 line-through text-lg mb-1">5 🥕</div>
@@ -329,7 +343,7 @@ export default function Home() {
                                                 <button
                                                     onClick={handleUltimateUnlock}
                                                     disabled={!isSpecialOffer && carrots < 5}
-                                                    className="flex-1 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-xl font-bold hover:from-yellow-600 hover:to-orange-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                                                    className="flex-1 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl font-bold hover:from-purple-600 hover:to-blue-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                                                 >
                                                     {isSpecialOffer ? 'Unlock FREE' : 'Unlock'}
                                                 </button>

@@ -21,31 +21,21 @@ const Hole = ({ weekNumber, status, onClick, isActive, isFocused, isUltimate = f
                 whileTap={{ scale: 0.95 }}
                 whileHover={{ scale: status !== 'locked' ? 1.1 : 1 }}
             >
-                {/* Castle Icon with Gold Shine */}
+                {/* Castle Icon */}
                 <div className="relative w-24 h-24 flex items-center justify-center">
-                    {/* Subtle gold shine effect */}
-                    {status !== 'locked' && (
-                        <motion.div
-                            className="absolute inset-0 bg-gradient-to-tr from-yellow-200/30 via-yellow-100/50 to-transparent rounded-lg"
-                            animate={{
-                                opacity: [0.3, 0.6, 0.3],
-                            }}
-                            transition={{
-                                duration: 3,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }}
-                        />
+                    {/* Castle Image */}
+                    <img 
+                        src="/castel.png" 
+                        alt="Castle" 
+                        className="w-20 h-20 relative z-10 object-contain"
+                    />
+                    {status === 'completed' && (
+                        <span className="absolute top-0 right-0 text-2xl z-20">✨</span>
                     )}
-                    
-                    {/* Castle Emoji */}
-                    <span className="text-6xl relative z-10">
-                        {status === 'completed' ? '🏰✨' : '🏰'}
-                    </span>
                 </div>
 
                 {/* Label */}
-                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs font-bold whitespace-nowrap text-yellow-700">
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs font-bold whitespace-nowrap text-gray-700">
                     Ultimate Quiz
                 </div>
             </motion.div>

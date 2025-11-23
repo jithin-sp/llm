@@ -43,9 +43,21 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
                 }
                 
                 let finalQuestions = [...q];
-                if (initialMode === 'shuffle') {
+                
+                // For Ultimate Quiz or shuffle mode, shuffle questions
+                if (weekNumber === 'ultimate' || weekNumber === 13 || initialMode === 'shuffle') {
                     finalQuestions = finalQuestions.sort(() => Math.random() - 0.5);
+                    
+                    // Also shuffle options for each question
+                    finalQuestions = finalQuestions.map(question => {
+                        const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+                        return {
+                            ...question,
+                            options: shuffledOptions
+                        };
+                    });
                 }
+                
                 setQuestions(finalQuestions);
             } catch (error) {
                 console.error("Failed to load questions", error);
@@ -123,7 +135,9 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
             // Quiz completed - save results to Appwrite and navigate to completion page
             if (mode === 'practice' || mode === 'shuffle') {
                 await saveQuizResults();
-                completeWeek(weekNumber);
+                // Convert weekNumber to integer for completeWeek
+                const weekNum = weekNumber === 'ultimate' || weekNumber === 13 ? 13 : parseInt(weekNumber, 10);
+                completeWeek(weekNum);
             } else {
                 // Learn mode - just close
                 onClose();
@@ -147,10 +161,24 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
             const scorePercentage = (correctCount / totalQuestions) * 100;
             const timeTaken = Math.floor((Date.now() - quizStartTime) / 1000); // in seconds
 
+            // Convert weekNumber to integer
+            let weekNum;
+            if (weekNumber === 'ultimate' || weekNumber === 13) {
+                weekNum = 13;
+            } else {
+                weekNum = parseInt(weekNumber, 10);
+                if (isNaN(weekNum)) {
+                    console.error('Invalid weekNumber:', weekNumber);
+                    throw new Error(`Invalid weekNumber: ${weekNumber}`);
+                }
+            }
+
+            console.log('Saving quiz results for week:', weekNum, 'mode:', mode);
+            
             const quizResults = {
                 userId: user.$id,
                 username: user.name || user.email.split('@')[0],
-                weekNumber: weekNumber === 'ultimate' ? 13 : weekNumber,
+                weekNumber: weekNum,
                 mode,
                 totalQuestions,
                 correctAnswers: correctCount,
@@ -160,12 +188,14 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
                 timeTaken,
             };
 
+            console.log('Quiz results object:', quizResults);
+
             // Save quiz attempt AND update user statistics atomically (single write operation)
             await saveQuizResultsAndUpdateUser(quizResults);
 
             // Navigate to completion page with results
             const params = new URLSearchParams({
-                week: weekNumber.toString(),
+                week: weekNum.toString(),
                 mode,
                 score: score.toString(),
                 total: totalQuestions.toString(),
@@ -182,8 +212,20 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
         }
     };
 
+    const progressPercentage = ((currentIndex + 1) / questions.length) * 100;
+
     return (
         <div className="fixed inset-0 bg-white z-50 flex flex-col">
+            {/* Progress Bar */}
+            <div className="w-full h-1.5 bg-gray-100">
+                <motion.div
+                    className="h-full bg-gradient-to-r from-blue-500 to-blue-600"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progressPercentage}%` }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                />
+            </div>
+
             <div className="p-4 border-b flex justify-between items-center bg-white sticky top-0 z-10">
                 <div className="flex items-center gap-2">
                     <span className="font-bold text-xl text-blue-600">Q{currentIndex + 1}/{questions.length}</span>
