@@ -5,6 +5,18 @@ import { getCurrentUser, createOrGetUserProfile, databases, APPWRITE_CONFIG } fr
 
 const GameContext = createContext();
 
+// Helper to check if localStorage is available
+const isLocalStorageAvailable = () => {
+    try {
+        const test = '__localStorage_test__';
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch (e) {
+        return false;
+    }
+};
+
 export const GameProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [carrots, setCarrots] = useState(12);
@@ -74,16 +86,21 @@ export const GameProvider = ({ children }) => {
     }, []);
 
     const loadFromLocal = () => {
-        const savedState = localStorage.getItem('rabbitQuizState');
-        if (savedState) {
-            try {
+        if (!isLocalStorageAvailable()) {
+            console.warn('localStorage is not available - using default values');
+            return;
+        }
+
+        try {
+            const savedState = localStorage.getItem('rabbitQuizState');
+            if (savedState) {
                 const { carrots, unlockedWeeks, currentWeek } = JSON.parse(savedState);
                 setCarrots(carrots || 12);
                 setUnlockedWeeks(unlockedWeeks || [1]);
                 setCurrentWeek(currentWeek || 1);
-            } catch (error) {
-                console.error('Error loading from localStorage:', error);
             }
+        } catch (error) {
+            console.warn('Error loading from localStorage:', error);
         }
     };
 
@@ -116,8 +133,16 @@ export const GameProvider = ({ children }) => {
         };
 
         const saveToLocal = () => {
-            const state = { carrots, unlockedWeeks, currentWeek };
-            localStorage.setItem('rabbitQuizState', JSON.stringify(state));
+            if (!isLocalStorageAvailable()) {
+                return; // Silently skip if not available
+            }
+
+            try {
+                const state = { carrots, unlockedWeeks, currentWeek };
+                localStorage.setItem('rabbitQuizState', JSON.stringify(state));
+            } catch (error) {
+                console.warn('Failed to save to localStorage:', error);
+            }
         };
 
         // Debounce save to avoid too many writes
