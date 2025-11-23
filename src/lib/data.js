@@ -29,3 +29,17 @@ export const getQuestionsForWeek = async (weekNumber) => {
   const week = await getWeekById(weekNumber);
   return week ? week.questions : [];
 };
+
+// Get all questions from all weeks (for Ultimate Quiz)
+export const getAllQuestions = async () => {
+  const weeks = await getAllWeeks();
+  const allQuestions = [];
+  
+  weeks.forEach((week) => {
+    if (week.questions && Array.isArray(week.questions)) {
+      allQuestions.push(...week.questions);
+    }
+  });
+  
+  return allQuestions;
+};

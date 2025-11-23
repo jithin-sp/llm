@@ -30,23 +30,28 @@ const Roadmap = ({ onHoleClick, onQuizStart, showTooltip, tooltipWeek }) => {
     // Auto-scroll to tooltip week when it appears
     useEffect(() => {
         if (tooltipWeek && holeRefs.current[tooltipWeek] && containerRef.current) {
-            const holeElement = holeRefs.current[tooltipWeek];
-            const container = containerRef.current;
+            // Small delay to ensure DOM is ready
+            setTimeout(() => {
+                const holeElement = holeRefs.current[tooltipWeek];
+                const container = containerRef.current;
 
-            // Calculate scroll position to center the hole
-            const holeRect = holeElement.getBoundingClientRect();
-            const containerRect = container.getBoundingClientRect();
-            const scrollTop = container.scrollTop;
-            const targetScroll = scrollTop + holeRect.top - containerRect.top - (containerRect.height / 2) + (holeRect.height / 2);
+                if (!holeElement || !container) return;
 
-            container.scrollTo({
-                top: targetScroll,
-                behavior: 'smooth'
-            });
+                // Calculate scroll position to center the hole
+                const holeRect = holeElement.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                const scrollTop = container.scrollTop;
+                const targetScroll = scrollTop + holeRect.top - containerRect.top - (containerRect.height / 2) + (holeRect.height / 2);
+
+                container.scrollTo({
+                    top: targetScroll,
+                    behavior: 'smooth'
+                });
+            }, 100);
         }
-    }, [tooltipWeek]);
+    }, [tooltipWeek, showTooltip]);
 
-    // Define positions for 12 holes (winding path upwards)
+    // Define positions for 12 holes + Ultimate Quiz (winding path upwards)
     const positions = [
         { x: 20, y: 90 }, // Week 1
         { x: 50, y: 85 }, // Week 2
@@ -60,9 +65,18 @@ const Roadmap = ({ onHoleClick, onQuizStart, showTooltip, tooltipWeek }) => {
         { x: 80, y: 30 }, // Week 10
         { x: 50, y: 25 }, // Week 11
         { x: 20, y: 20 }, // Week 12
+        { x: 50, y: 10 }, // Ultimate Quiz (Week 13)
     ];
 
     const getStatus = (week) => {
+        // Ultimate Quiz (week 13) is unlocked only if all 12 weeks are unlocked
+        if (week === 13) {
+            const allWeeksUnlocked = Array.from({ length: 12 }, (_, i) => i + 1).every(w => unlockedWeeks.includes(w));
+            if (!allWeeksUnlocked) return 'locked';
+            if (completedWeeks.includes(week)) return 'completed';
+            return 'unlocked';
+        }
+        
         if (completedWeeks.includes(week)) return 'completed';
         if (unlockedWeeks.includes(week)) return 'unlocked';
         return 'locked';
@@ -115,6 +129,7 @@ const Roadmap = ({ onHoleClick, onQuizStart, showTooltip, tooltipWeek }) => {
                     const week = index + 1;
                     const isFocused = focusedWeek === week;
                     const showWeekTooltip = showTooltip && tooltipWeek === week;
+                    const isUltimate = week === 13;
 
                     return (
                         <div
@@ -129,6 +144,7 @@ const Roadmap = ({ onHoleClick, onQuizStart, showTooltip, tooltipWeek }) => {
                                 onClick={() => handleHoleInteraction(week)}
                                 isActive={currentWeek === week} // Visual active state (rabbit)
                                 isFocused={isFocused} // Visual focus state (ring)
+                                isUltimate={isUltimate}
                             />
 
                             {/* Options Popover - Show if focused and unlocked/completed */}
@@ -136,6 +152,7 @@ const Roadmap = ({ onHoleClick, onQuizStart, showTooltip, tooltipWeek }) => {
                                 <HoleOptions
                                     position={{ top: '100%', left: '50%' }}
                                     onSelect={handleOptionSelect}
+                                    isUltimate={isUltimate}
                                 />
                             )}
 

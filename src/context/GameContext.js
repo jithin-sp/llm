@@ -152,15 +152,18 @@ export const GameProvider = ({ children }) => {
         }
     }, [carrots, unlockedWeeks, currentWeek, user, userProfileId, loading]);
 
-    const unlockWeek = (weekNumber) => {
+    const unlockWeek = (weekNumber, cost = 1) => {
         if (unlockedWeeks.includes(weekNumber)) {
             return true; // Already unlocked
         }
 
-        if (carrots >= 1) {
-            setCarrots((prev) => prev - 1);
+        // Check if we have enough carrots
+        if (carrots >= cost) {
+            setCarrots((prev) => prev - cost);
             setUnlockedWeeks((prev) => [...prev, weekNumber]);
-            setCurrentWeek(weekNumber);
+            if (weekNumber !== 13) {
+                setCurrentWeek(weekNumber);
+            }
             return true;
         }
         return false; // Not enough carrots

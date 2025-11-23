@@ -32,7 +32,16 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
         const loadQuestions = async () => {
             setLoading(true);
             try {
-                const q = await getQuestionsForWeek(weekNumber);
+                let q;
+                // Check if this is the Ultimate Quiz
+                if (weekNumber === 'ultimate' || weekNumber === 13) {
+                    // Import getAllQuestions for Ultimate Quiz
+                    const { getAllQuestions } = await import('../lib/data');
+                    q = await getAllQuestions();
+                } else {
+                    q = await getQuestionsForWeek(weekNumber);
+                }
+                
                 let finalQuestions = [...q];
                 if (initialMode === 'shuffle') {
                     finalQuestions = finalQuestions.sort(() => Math.random() - 0.5);
@@ -141,7 +150,7 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
             const quizResults = {
                 userId: user.$id,
                 username: user.name || user.email.split('@')[0],
-                weekNumber,
+                weekNumber: weekNumber === 'ultimate' ? 13 : weekNumber,
                 mode,
                 totalQuestions,
                 correctAnswers: correctCount,
@@ -178,7 +187,13 @@ const QuizInterface = ({ weekNumber, onClose, initialMode }) => {
             <div className="p-4 border-b flex justify-between items-center bg-white sticky top-0 z-10">
                 <div className="flex items-center gap-2">
                     <span className="font-bold text-xl text-blue-600">Q{currentIndex + 1}/{questions.length}</span>
-                    <span className="text-sm text-gray-400 uppercase tracking-wider">{mode}</span>
+                    {(weekNumber === 'ultimate' || weekNumber === 13) ? (
+                        <span className="text-sm bg-gradient-to-r from-purple-500 to-pink-500 text-white px-2 py-1 rounded-full font-bold uppercase tracking-wider">
+                            🏆 Ultimate
+                        </span>
+                    ) : (
+                        <span className="text-sm text-gray-400 uppercase tracking-wider">{mode}</span>
+                    )}
                     {isMultipleChoice && (
                         <span className="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full font-bold">
                             Multiple Choice

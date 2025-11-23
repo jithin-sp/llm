@@ -1,40 +1,96 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Roadmap from '../../components/Roadmap';
 import { useGame } from '../../context/GameContext';
-import { Carrot } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Carrot, Clock, Sparkles } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Home() {
     const router = useRouter();
     const { carrots, unlockWeek, unlockedWeeks, completedWeeks } = useGame();
     const [showUnlockModal, setShowUnlockModal] = useState(null);
+    const [showUltimateModal, setShowUltimateModal] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
     const [tooltipWeek, setTooltipWeek] = useState(null);
+    const [isSpecialOffer, setIsSpecialOffer] = useState(false);
+    const [timeRemaining, setTimeRemaining] = useState(0);
 
-    const totalWeeks = 12;
+    const totalWeeks = 13; // 12 weeks + Ultimate Quiz
     const progressPercentage = Math.round((completedWeeks.length / totalWeeks) * 100);
+
+    // Check for special 5-hour free offer
+    useEffect(() => {
+        const checkSpecialOffer = () => {
+            try {
+                const offerKey = 'ultimateQuizSpecialOffer';
+                const offerData = localStorage.getItem(offerKey);
+                
+                if (offerData) {
+                    const { startTime } = JSON.parse(offerData);
+                    const elapsed = Date.now() - startTime;
+                    const fiveHours = 5 * 60 * 60 * 1000;
+                    
+                    if (elapsed < fiveHours) {
+                        setIsSpecialOffer(true);
+                        setTimeRemaining(fiveHours - elapsed);
+                    } else {
+                        localStorage.removeItem(offerKey);
+                        setIsSpecialOffer(false);
+                    }
+                }
+            } catch (error) {
+                console.warn('localStorage not available for special offer:', error);
+            }
+        };
+
+        checkSpecialOffer();
+        const interval = setInterval(checkSpecialOffer, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    // Format time remaining
+    const formatTime = (ms) => {
+        const hours = Math.floor(ms / (1000 * 60 * 60));
+        const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((ms % (1000 * 60)) / 1000);
+        return `${hours}h ${minutes}m ${seconds}s`;
+    };
 
     const handleHoleClick = (week) => {
         // Only called for locked holes now
+        
+        // Ultimate Quiz (week 13) - show unlock modal
+        if (week === 13) {
+            setShowUltimateModal(true);
+            return;
+        }
+        
         const prevWeek = week - 1;
 
         if (week === 1 || unlockedWeeks.includes(prevWeek)) {
             // Can unlock this week - show modal
             setShowUnlockModal(week);
         } else {
-            // Must unlock previous week first - scroll to it and show tooltip
+            // Must unlock previous week first - find the next sequential locked week
             const nextLockedWeek = findNextLockedWeek();
             if (nextLockedWeek) {
-                setTooltipWeek(nextLockedWeek);
-                setShowTooltip(true);
+                // Clear any existing tooltip first
+                setShowTooltip(false);
+                setTooltipWeek(null);
+                
+                // Set new tooltip and trigger scroll
+                setTimeout(() => {
+                    setTooltipWeek(nextLockedWeek);
+                    setShowTooltip(true);
+                }, 50);
 
-                // Hide tooltip after 3 seconds
+                // Hide tooltip after 4 seconds
                 setTimeout(() => {
                     setShowTooltip(false);
-                }, 3000);
+                    setTooltipWeek(null);
+                }, 4050);
             }
         }
     };
@@ -50,7 +106,12 @@ export default function Home() {
     };
 
     const handleQuizStart = (week, mode) => {
-        router.push(`/quiz/${week}/${mode}`);
+        // Ultimate Quiz always uses shuffle mode with all questions
+        if (week === 13) {
+            router.push(`/quiz/ultimate/shuffle`);
+        } else {
+            router.push(`/quiz/${week}/${mode}`);
+        }
     };
 
     const handleUnlock = () => {
@@ -61,6 +122,37 @@ export default function Home() {
             } else {
                 alert("Not enough carrots!");
             }
+        }
+    };
+
+    const handleUltimateUnlock = () => {
+        const allWeeksUnlocked = Array.from({ length: 12 }, (_, i) => i + 1).every(w => unlockedWeeks.includes(w));
+        
+        if (!allWeeksUnlocked) {
+            return; // Should not happen, but safety check
+        }
+
+        const cost = isSpecialOffer ? 0 : 5;
+
+        if (cost > 0 && carrots < cost) {
+            return; // Not enough carrots
+        }
+
+        // Unlock Ultimate Quiz (week 13) with custom cost
+        const success = unlockWeek(13, cost);
+        if (success) {
+            setShowUltimateModal(false);
+        }
+    };
+
+    const activateSpecialOffer = () => {
+        try {
+            const offerKey = 'ultimateQuizSpecialOffer';
+            localStorage.setItem(offerKey, JSON.stringify({ startTime: Date.now() }));
+            setIsSpecialOffer(true);
+            setTimeRemaining(5 * 60 * 60 * 1000);
+        } catch (error) {
+            console.warn('Failed to activate special offer:', error);
         }
     };
 
@@ -100,7 +192,7 @@ export default function Home() {
                 />
             </div>
 
-            {/* Unlock Modal */}
+            {/* Regular Week Unlock Modal */}
             {showUnlockModal && (
                 <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
                     <motion.div
@@ -129,6 +221,133 @@ export default function Home() {
                     </motion.div>
                 </div>
             )}
+
+            {/* Ultimate Quiz Unlock Modal */}
+            <AnimatePresence>
+                {showUltimateModal && (
+                    <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0, y: 50 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.8, opacity: 0, y: 50 }}
+                            className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 w-full max-w-md shadow-2xl border-4 border-yellow-400 relative overflow-hidden"
+                        >
+                            {/* Decorative shine effect */}
+                            <motion.div
+                                className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent"
+                                animate={{
+                                    x: ['-100%', '100%'],
+                                }}
+                                transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    repeatDelay: 3,
+                                }}
+                            />
+
+                            {/* Content */}
+                            <div className="relative z-10">
+                                {/* Castle Icon */}
+                                <div className="text-center mb-4">
+                                    <span className="text-7xl">🏰</span>
+                                </div>
+
+                                <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Ultimate Quiz</h2>
+                                
+                                {/* Check if all weeks are unlocked */}
+                                {!Array.from({ length: 12 }, (_, i) => i + 1).every(w => unlockedWeeks.includes(w)) ? (
+                                    <>
+                                        <p className="text-gray-700 text-center mb-6 text-lg">
+                                            🔒 Unlock all 12 weeks first!
+                                        </p>
+                                        <button
+                                            onClick={() => setShowUltimateModal(false)}
+                                            className="w-full py-4 bg-gray-600 text-white rounded-xl font-bold text-lg hover:bg-gray-700 transition-colors"
+                                        >
+                                            Got it
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        {/* Special Offer Banner */}
+                                        {isSpecialOffer ? (
+                                            <motion.div
+                                                initial={{ scale: 0.9 }}
+                                                animate={{ scale: 1 }}
+                                                className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-3 rounded-xl mb-4 text-center"
+                                            >
+                                                <div className="flex items-center justify-center gap-2 mb-1">
+                                                    <Sparkles className="w-5 h-5" />
+                                                    <span className="font-bold text-lg">SPECIAL OFFER!</span>
+                                                    <Sparkles className="w-5 h-5" />
+                                                </div>
+                                                <div className="flex items-center justify-center gap-2 text-sm">
+                                                    <Clock className="w-4 h-4" />
+                                                    <span>{formatTime(timeRemaining)} remaining</span>
+                                                </div>
+                                            </motion.div>
+                                        ) : null}
+
+                                        <p className="text-gray-700 text-center mb-4">
+                                            Face all questions from all 12 weeks in one ultimate challenge!
+                                        </p>
+
+                                        {/* Cost Display */}
+                                        <div className="bg-white/80 rounded-xl p-4 mb-6 text-center border-2 border-yellow-300">
+                                            {isSpecialOffer ? (
+                                                <>
+                                                    <div className="text-gray-400 line-through text-lg mb-1">5 🥕</div>
+                                                    <div className="text-3xl font-bold text-green-600">FREE!</div>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <div className="text-sm text-gray-600 mb-1">Unlock Cost</div>
+                                                    <div className="text-3xl font-bold text-orange-600">5 🥕</div>
+                                                </>
+                                            )}
+                                        </div>
+
+                                        {/* Action Buttons */}
+                                        <div className="space-y-3">
+                                            {!isSpecialOffer && (
+                                                <button
+                                                    onClick={activateSpecialOffer}
+                                                    className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl font-bold text-lg hover:from-green-600 hover:to-emerald-600 transition-all shadow-lg flex items-center justify-center gap-2"
+                                                >
+                                                    <Sparkles className="w-5 h-5" />
+                                                    Activate 5-Hour Free Pass
+                                                </button>
+                                            )}
+
+                                            <div className="flex gap-3">
+                                                <button
+                                                    onClick={() => setShowUltimateModal(false)}
+                                                    className="flex-1 py-3 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-colors"
+                                                >
+                                                    Cancel
+                                                </button>
+                                                <button
+                                                    onClick={handleUltimateUnlock}
+                                                    disabled={!isSpecialOffer && carrots < 5}
+                                                    className="flex-1 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-xl font-bold hover:from-yellow-600 hover:to-orange-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                                                >
+                                                    {isSpecialOffer ? 'Unlock FREE' : 'Unlock'}
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {!isSpecialOffer && carrots < 5 && (
+                                            <p className="text-red-500 text-sm text-center mt-3">
+                                                Not enough carrots! You need {5 - carrots} more.
+                                            </p>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

@@ -3,9 +3,56 @@
 import { motion } from 'framer-motion';
 import { Lock, Check } from 'lucide-react';
 
-const Hole = ({ weekNumber, status, onClick, isActive, isFocused }) => {
+const Hole = ({ weekNumber, status, onClick, isActive, isFocused, isUltimate = false }) => {
     // status: 'locked', 'unlocked', 'completed'
 
+    // Castle for Ultimate Quiz
+    if (isUltimate) {
+        const castleClasses = status === 'locked' 
+            ? "opacity-50 grayscale"
+            : status === 'completed'
+            ? "animate-pulse"
+            : "";
+
+        return (
+            <motion.div
+                className={`relative cursor-pointer transition-all duration-300 ${castleClasses}`}
+                onClick={onClick}
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: status !== 'locked' ? 1.1 : 1 }}
+            >
+                {/* Castle Icon with Gold Shine */}
+                <div className="relative w-24 h-24 flex items-center justify-center">
+                    {/* Subtle gold shine effect */}
+                    {status !== 'locked' && (
+                        <motion.div
+                            className="absolute inset-0 bg-gradient-to-tr from-yellow-200/30 via-yellow-100/50 to-transparent rounded-lg"
+                            animate={{
+                                opacity: [0.3, 0.6, 0.3],
+                            }}
+                            transition={{
+                                duration: 3,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                        />
+                    )}
+                    
+                    {/* Castle Emoji */}
+                    <span className="text-6xl relative z-10">
+                        {status === 'completed' ? '🏰✨' : '🏰'}
+                    </span>
+                </div>
+
+                {/* Label */}
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs font-bold whitespace-nowrap text-yellow-700">
+                    Ultimate Quiz
+                </div>
+            </motion.div>
+        );
+    }
+
+    // Regular holes
     const baseClasses = "w-16 h-16 rounded-full flex items-center justify-center border-4 shadow-md transition-all duration-300 cursor-pointer relative";
 
     const statusClasses = {
